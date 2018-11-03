@@ -34,7 +34,6 @@
             this.dtp_Bis = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
             this.txt_Quelle = new System.Windows.Forms.TextBox();
             this.txt_Ziel = new System.Windows.Forms.TextBox();
             this.btn_QuellWahl = new System.Windows.Forms.Button();
@@ -44,6 +43,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txt_Urlaubsziel = new System.Windows.Forms.TextBox();
             this.btn_Start = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lbl_prozentanzeige = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // dtp_Vom
@@ -106,12 +108,13 @@
             // 
             // btn_QuellWahl
             // 
-            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 86);
+            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 79);
             this.btn_QuellWahl.Name = "btn_QuellWahl";
             this.btn_QuellWahl.Size = new System.Drawing.Size(75, 20);
             this.btn_QuellWahl.TabIndex = 7;
             this.btn_QuellWahl.Text = "Auswählen";
             this.btn_QuellWahl.UseVisualStyleBackColor = true;
+            this.btn_QuellWahl.Click += new System.EventHandler(this.btn_QuellWahl_Click);
             // 
             // btn_Zielwahl
             // 
@@ -121,6 +124,7 @@
             this.btn_Zielwahl.TabIndex = 8;
             this.btn_Zielwahl.Text = "Auswählen";
             this.btn_Zielwahl.UseVisualStyleBackColor = true;
+            this.btn_Zielwahl.Click += new System.EventHandler(this.btn_Zielwahl_Click);
             // 
             // label4
             // 
@@ -151,10 +155,11 @@
             // 
             // txt_Urlaubsziel
             // 
-            this.txt_Urlaubsziel.Location = new System.Drawing.Point(77, 168);
+            this.txt_Urlaubsziel.Location = new System.Drawing.Point(77, 165);
             this.txt_Urlaubsziel.Name = "txt_Urlaubsziel";
             this.txt_Urlaubsziel.Size = new System.Drawing.Size(174, 20);
             this.txt_Urlaubsziel.TabIndex = 12;
+            this.txt_Urlaubsziel.TextChanged += new System.EventHandler(this.txt_Urlaubsziel_TextChanged);
             // 
             // btn_Start
             // 
@@ -165,12 +170,39 @@
             this.btn_Start.TabIndex = 13;
             this.btn_Start.Text = "Start";
             this.btn_Start.UseVisualStyleBackColor = true;
+            this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(12, 198);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(471, 23);
+            this.progressBar1.TabIndex = 14;
+            // 
+            // lbl_prozentanzeige
+            // 
+            this.lbl_prozentanzeige.AutoSize = true;
+            this.lbl_prozentanzeige.Location = new System.Drawing.Point(432, 179);
+            this.lbl_prozentanzeige.Name = "lbl_prozentanzeige";
+            this.lbl_prozentanzeige.Size = new System.Drawing.Size(35, 13);
+            this.lbl_prozentanzeige.TabIndex = 15;
+            this.lbl_prozentanzeige.Text = "label7";
+            this.lbl_prozentanzeige.Visible = false;
             // 
             // MainTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 262);
+            this.Controls.Add(this.lbl_prozentanzeige);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btn_Start);
             this.Controls.Add(this.txt_Urlaubsziel);
             this.Controls.Add(this.label6);
@@ -189,6 +221,7 @@
             this.MaximizeBox = false;
             this.Name = "MainTool";
             this.Text = "Photo Sorter";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainTool_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,7 +235,6 @@
         private System.Windows.Forms.DateTimePicker dtp_Bis;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
         private System.Windows.Forms.TextBox txt_Quelle;
         private System.Windows.Forms.TextBox txt_Ziel;
         private System.Windows.Forms.Button btn_QuellWahl;
@@ -212,6 +244,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txt_Urlaubsziel;
         private System.Windows.Forms.Button btn_Start;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label lbl_prozentanzeige;
     }
 }
 
