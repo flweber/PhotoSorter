@@ -1,0 +1,18 @@
+body {
+	overflow-x: hidden;
+}
+
+section {
+	margin-top:55px;
+	padding-left: 15px;
+}
+
+.col {
+	background-color: #2E2E2E; /* #5C0101 */
+	border: 1px solid black;
+}
+
+img {
+	width: 200px;
+	height: 200px;
+}
