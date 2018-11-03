@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PhotoSorter
 {
-    public partial class Form1 : Form
+    public partial class MainTool : Form
     {
-        public Form1()
+        public MainTool()
         {
             InitializeComponent();
         }
