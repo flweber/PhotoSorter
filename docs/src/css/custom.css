@@ -8,11 +8,13 @@ section {
 }
 
 .col {
-	background-color: #2E2E2E; /* #5C0101 */
+	background-color: #24c6cc/*#2E2E2E*/; /* #5C0101 */
 	border: 1px solid black;
 }
 
+/*
 img {
 	width: 200px;
 	height: 200px;
 }
+*/
