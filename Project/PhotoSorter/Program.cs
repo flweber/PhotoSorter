@@ -29,7 +29,7 @@ namespace PhotoSorter
             XmlDocument Web = new XmlDocument();
             XmlNode lroot, wroot, lnode, wnode;
             Local.Load(Path.Combine(Application.StartupPath, "version.xml"));
-            Web.Load("https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/version.xml");
+            Web.Load("https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/update/version.xml");
             lroot = Local.DocumentElement;
             wroot = Web.DocumentElement;
             lnode = lroot.SelectSingleNode("version");
@@ -37,7 +37,7 @@ namespace PhotoSorter
             string localVersion = lnode.InnerText;
             string remoteVersion = wnode.InnerText;
             if (!localVersion.Equals(remoteVersion))
-                Process.Start("Updater.exe", "\"https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/update\" \"Release.zip\" \""+Application.StartupPath+"\" \""+Application.ExecutablePath+"\" \""+Process.GetCurrentProcess().Id+"\"");
+                Process.Start("Updater.exe", "\"https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/update/\" \"Release.zip\" \""+Application.StartupPath+"\" \""+Application.ExecutablePath+"\" \""+Process.GetCurrentProcess().Id+"\"");
         }
     }
 }

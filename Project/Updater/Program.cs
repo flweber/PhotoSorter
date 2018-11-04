@@ -17,28 +17,31 @@ namespace Updater
             string Url = args[0];
             string Zip = args[1];
             string ApplicationPath = args[2];
-            string Executable = args[3];
+            string Executable = Path.GetFileName(args[3]);
             string ProcessID = args[4];
 
             Process.GetProcessById(Convert.ToInt32(ProcessID)).Kill();
+
             try
             {
                 using (var client = new WebClient())
                 {
                     client.DownloadFile(Url + Zip, ApplicationPath + "\\" + Zip);
                     ZipFile.ExtractToDirectory(Path.Combine(ApplicationPath, Zip), Path.Combine(ApplicationPath, Zip.Split('.')[0]));
-                    string[] files = Directory.GetFiles(Path.Combine(ApplicationPath, Executable.Split('.')[0]) + ".*");
-                    foreach (string file in files)
+                    DirectoryInfo SearchDir = new DirectoryInfo(ApplicationPath);
+                    FileInfo[] files = SearchDir.GetFiles(Executable.Split('.')[0] + ".*");
+                    foreach (FileInfo file in files)
                     {
-                        File.Delete(file);
+                        File.Delete(file.FullName);
                     }
-                    files = Directory.GetFiles(Path.Combine(ApplicationPath, Zip.Split('.')[0], Executable.Split('.')[0]) + ".*");
-                    foreach (string file in files)
+                    SearchDir = new DirectoryInfo(Path.Combine(ApplicationPath, Zip.Split('.')[0]));
+                    files = SearchDir.GetFiles(Executable.Split('.')[0] + ".*");
+                    foreach (FileInfo file in files)
                     {
-                        FileInfo fileInfo = new FileInfo(file);
-                        File.Move(file, Path.Combine(ApplicationPath, fileInfo.Name));
+                        File.Move(file.FullName, Path.Combine(ApplicationPath, file.Name));
                     }
-                    Directory.Delete(Path.Combine(ApplicationPath, Zip.Split('.')[0]));
+                    Directory.Delete(Path.Combine(ApplicationPath, Zip.Split('.')[0]), true);
+                    File.Delete(Path.Combine(ApplicationPath, Zip));
                     Process.Start(Path.Combine(ApplicationPath, Executable));
                 }
             }
@@ -46,6 +49,7 @@ namespace Updater
             {
                 Console.WriteLine("Leider gab es einen Fehler bei dem Update der Software " + Executable.Split('.')[0]);
                 Console.WriteLine(ex.Message);
+                Console.ReadKey();
             }
         }
     }
