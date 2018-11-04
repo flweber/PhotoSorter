@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace PhotoSorter
 {
@@ -17,10 +18,19 @@ namespace PhotoSorter
         public MainTool()
         {
             InitializeComponent();
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string version = fvi.FileVersion;
-            Text += " - " + version;
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                XmlNode root, node;
+                doc.Load("version.xml");
+                root = doc.DocumentElement;
+                node = root.SelectSingleNode("version");
+                Text += " - " + node.InnerText;
+            }
+            catch
+            {
+                // Wenn es einen Fehler gibt wird die Version eben nicht angezeigt
+            }
         }
 
         /// <summary>
@@ -84,7 +94,10 @@ namespace PhotoSorter
                 int counter = 1;
                 foreach(string file in files)
                 {
-                    if(file.ToLower().EndsWith(".png") || file.ToLower().EndsWith(".jpg") || file.ToLower().EndsWith(".jpeg"))
+                    if(file.ToLower().EndsWith(".png") || file.ToLower().EndsWith(".jpg") 
+                        || file.ToLower().EndsWith(".jpeg") || file.ToLower().EndsWith(".tif") 
+                        || file.ToLower().EndsWith(".bmp") || file.ToLower().EndsWith(".gif") 
+                        || file.ToLower().EndsWith(".raw"))
                     {
                         FileInfo fileInfo = new FileInfo(file);
                         if(fileInfo.CreationTime.Date >= dtp_Vom.Value.Date && fileInfo.CreationTime.Date <= dtp_Bis.Value.Date)

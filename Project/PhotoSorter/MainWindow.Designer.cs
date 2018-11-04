@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainTool));
             this.dtp_Vom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -218,8 +219,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtp_Vom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainTool";
+            this.ShowIcon = false;
             this.Text = "Photo Sorter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainTool_FormClosing);
             this.ResumeLayout(false);
