@@ -2,7 +2,7 @@
 <html lang="de">
 	<head>
 		<meta charset="UTF-8" />
-		<title>PhotoSorter Dokumentation</title>
+		<title>PhotoSorter - Urlaubsfotos schnell sortieren</title>
 		<script src="../src/jquery/jquery.min.js"></script>
 		<script src="../src/bootstrap/js/bootstrap.min.js"></script>
 		<script src="../src/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -53,25 +53,30 @@
 				<div class="col"></div>
 				<div class="col">
 					<h1 class="text-white">PhotoSorter</h1>
-					<p class="text-white">Der Foto Sortierer ist ein kleines Programm, mit dem<br />Sie m&uuml;helos
+					<p class="text-white">
+						Der Foto Sortierer ist ein kleines Programm, mit dem<br />Sie m&uuml;helos
 						Ihre Urlaubsfotos Datumssortiert ablegen k&ouml;nnen. Dieses Tool dient dazu, dass Sie sich jederzeit
-						in Ihren Erinerungen zurecht finden!</p>
+						in Ihren Erinerungen zurecht finden!
+					</p>
 				</div>
 				<div class="col"></div>
 			</div>
 		</section>
 		<section id="install">
 			<div class="row">
-				<div class="col">
-					<h1 class="text-white">Voraussetzungen</h1>
-					<p class="text-white">Ein Windows Computer oder Tablet mit dem .NET Framework. Das .NET Framework
-						ist in jeder Standard Windows Installation enthalten.</p>
-				</div>
+				<div class="col"></div>
 				<div class="col">
 					<h1 class="text-white">Installation</h1>
+					<h2 class="text-white">Automatische Installation</h2>
 					<p class="text-white">
-						Laden Sie sich einfach das Programm &uuml;ber den Download Link herunter und starten Sie die .exe-Datei.<br />
-						Derzeit ist keine Installation notwendig.
+						Laden Sie sich den die .msi-Datei &uuml;ber den Download Link herunter und f&uuml;hren Sie diese aus.
+						Hier k&ouml;nnen Sie sich nun einfach mit dem Weiter-Knopf durchklicken.<br />
+						Sollten Sie den Installationspfad &auml;ndern achten Sie bitte darauf, dass das Installationsverzeichnis nicht schreibgesch&uuml;tzt ist.
+					</p>
+					<h2 class="text-white">Manuelle Installation</h2>
+					<p class="text-white">
+						Laden Sie sich den die .zip-Datei &uuml;ber den Download Link herunter und entpacken Sie die Datei in einem Ordner.<br />
+						Achten Sie hierbei unbedingt darauf, dass sich die Dateien nicht in einem schreibgesch&uuml;tzten Verzeichnis befinden.
 					</p>
 				</div>
 				<div class="col"></div>
@@ -83,7 +88,12 @@
 				<div class="col">
 					<h1 class="text-white">Verwendung</h1>
 					<p class="text-white">
-						
+						Zuerst geben Sie den Datumsbereich ein, in dem sich die Fotos befinden, die Sie sortieren wollen.
+						Als nächstes wählen Sie dann den Ordner aus, in welchem sich die zu sortierenden Bilder befinden,
+						danach machen Sie dasselbe für den Ordner, in den diese herein sortiert werden sollen.
+						In diesem Ordner brauchen Sie keinen weiteren Ordner anlegen, dass &uuml;bernimmt das Programm f&uuml;r Sie.
+						In dem Ordner wird das Programm für Sie einen Unterordner erstellen, welcher nach Ihrem Urlaubsziel benannt ist.
+						In diesen werden die Fotos nun nach ihrem Aufnahmedatum sortiert.
 					</p>
 				</div>
 				<div class="col"></div>
@@ -116,13 +126,17 @@
 				</div>
 				<div class="col">
 					<center>
-						Pipeline:<br />
+						<h1 class="text-white">Pipelines:</h1>
+						<h2 class="text-white">Aktueller Build:</h2>
 						<img src="https://app.buddy.works/flweber/photosorter/pipelines/pipeline/157842/badge.svg?token=83feb5eaee273c20cf71c63f63dab16b2a88cd8157205da54065aab166febef0" class="rounded img-fluid align-baseline" />
+						<h2 class="text-white">Developement Build:</h2>
+						<img src="https://app.buddy.works/flweber/photosorter/pipelines/pipeline/158664/badge.svg?token=83feb5eaee273c20cf71c63f63dab16b2a88cd8157205da54065aab166febef0" class="rounded img-fluid align-baseline" />
 					</center>
 				</div>
 				<div class="col">
 					<h1 class="text-white">Download</h1>
-					<a href="https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/WindowsFormsApp3.exe" class="text-white btn btn-link">Download</a>
+					<a href="https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/PhotoSorterInstaller.msi" class="text-white btn btn-link">Download (.msi)</a><br />
+					<a href="https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/update/Release.zip" class="text-white btn btn-link">Download (.zip)</a>
 				</div>
 			</div>
 		</section>
