@@ -37,7 +37,7 @@ namespace PhotoSorter
             string localVersion = lnode.InnerText;
             string remoteVersion = wnode.InnerText;
             if (!localVersion.Equals(remoteVersion))
-                Process.Start("Updater.exe", "\"https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/\" \"update.zip\" \""+Application.StartupPath+"\" \""+Application.ExecutablePath+"\" \""+Process.GetCurrentProcess().Id+"\"");
+                Process.Start("Updater.exe", "\"https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/update\" \"Release.zip\" \""+Application.StartupPath+"\" \""+Application.ExecutablePath+"\" \""+Process.GetCurrentProcess().Id+"\"");
         }
     }
 }
