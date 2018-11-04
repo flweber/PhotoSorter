@@ -84,7 +84,10 @@ namespace PhotoSorter
                 int counter = 1;
                 foreach(string file in files)
                 {
-                    if(file.ToLower().EndsWith(".png") || file.ToLower().EndsWith(".jpg") || file.ToLower().EndsWith(".jpeg"))
+                    if(file.ToLower().EndsWith(".png") || file.ToLower().EndsWith(".jpg") 
+                        || file.ToLower().EndsWith(".jpeg") || file.ToLower().EndsWith(".tif") 
+                        || file.ToLower().EndsWith(".bmp") || file.ToLower().EndsWith(".gif") 
+                        || file.ToLower().EndsWith(".raw"))
                     {
                         FileInfo fileInfo = new FileInfo(file);
                         if(fileInfo.CreationTime.Date >= dtp_Vom.Value.Date && fileInfo.CreationTime.Date <= dtp_Bis.Value.Date)

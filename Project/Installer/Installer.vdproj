@@ -373,7 +373,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Photo Sorter"
         "ProductCode" = "8:{8147D310-84E0-4232-8D1A-077212A42875}"
-        "PackageCode" = "8:{279DF7BD-2D82-4FD1-AA28-5D61CBE62BCD}"
+        "PackageCode" = "8:{57EEDC66-F071-4D83-A87D-2EB0F5AEC917}"
         "UpgradeCode" = "8:{FC1BF14C-9B87-4EB0-A276-11D543512F67}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -493,6 +493,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0F55A339BF434F93BC7DB3CF5684655B"
+            {
+            "Name" = "8:Photo Sorter"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_84C75FF6F70B449397150A08A3C22226"
+            "Folder" = "8:_75D44135B69A4E5C8832BD50D5AAEBA7"
+            "WorkingFolder" = "8:_048DA0FB160549DEA6C53ACCC83BFE5B"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5AA20A3FAF0F4649A90D19C29EE33F9B"
+            {
+            "Name" = "8:Photo Sorter"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_84C75FF6F70B449397150A08A3C22226"
+            "Folder" = "8:_D39EEBD9691249CABEA670F8A0BD887C"
+            "WorkingFolder" = "8:_048DA0FB160549DEA6C53ACCC83BFE5B"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
