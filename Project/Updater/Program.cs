@@ -30,7 +30,7 @@ namespace Updater
                 using (var client = new WebClient())
                 {
                     Console.WriteLine("Downloade Update...");
-                    client.DownloadFile(Url + Zip, ApplicationPath + "\\" + Zip);
+                    client.DownloadFile(@Url + @Zip, @ApplicationPath + @"\\" + @Zip);
                     Console.WriteLine("Entpacke Update Dateien...");
                     ZipFile.ExtractToDirectory(Path.Combine(ApplicationPath, Zip), Path.Combine(ApplicationPath, Zip.Split('.')[0]));
                     Console.WriteLine("Räume Programmverzeichnis auf...");
@@ -60,6 +60,8 @@ namespace Updater
             {
                 Console.WriteLine("Leider gab es einen Fehler bei dem Update der Software " + Executable.Split('.')[0]);
                 Console.WriteLine(ex.Message);
+                if (ex.InnerException != null)
+                    Console.WriteLine(ex.InnerException.Message);
                 Console.ReadKey();
             }
         }

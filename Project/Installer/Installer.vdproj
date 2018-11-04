@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_352B525B47F346C1A3BA23AEA3838836"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4823CB756F51FF2DD93BFCAC445CCBDD"
         "OwnerKey" = "8:_84C75FF6F70B449397150A08A3C22226"
         "MsmSig" = "8:_UNDEFINED"
@@ -117,7 +123,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\Installer.msi"
+        "OutputFilename" = "8:Debug\\PhotoSorterInstaller.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -133,7 +139,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Installer.msi"
+        "OutputFilename" = "8:Release\\PhotoSorterSetup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -172,6 +178,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_352B525B47F346C1A3BA23AEA3838836"
+            {
+            "SourcePath" = "8:..\\PhotoSorter\\ToolIcon.ico"
+            "TargetName" = "8:ToolIcon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_048DA0FB160549DEA6C53ACCC83BFE5B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4823CB756F51FF2DD93BFCAC445CCBDD"
             {
             "AssemblyRegister" = "3:1"
@@ -324,7 +350,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_048DA0FB160549DEA6C53ACCC83BFE5B"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[AppDataFolder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -373,7 +399,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Photo Sorter"
         "ProductCode" = "8:{8147D310-84E0-4232-8D1A-077212A42875}"
-        "PackageCode" = "8:{57EEDC66-F071-4D83-A87D-2EB0F5AEC917}"
+        "PackageCode" = "8:{FAFC359E-3B1D-4272-AA54-7F3E31C9DB8D}"
         "UpgradeCode" = "8:{FC1BF14C-9B87-4EB0-A276-11D543512F67}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -389,7 +415,7 @@
         "ARPCONTACT" = "8:R.Dillmann & F.Weber"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:A small Tool to sort your holiday pictures into datetime folders."
-        "ARPURLINFOABOUT" = "8:https://flweber.github.io"
+        "ARPURLINFOABOUT" = "8:https://flweber.github.io/PhotoSorter"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
@@ -504,7 +530,7 @@
             "Target" = "8:_84C75FF6F70B449397150A08A3C22226"
             "Folder" = "8:_75D44135B69A4E5C8832BD50D5AAEBA7"
             "WorkingFolder" = "8:_048DA0FB160549DEA6C53ACCC83BFE5B"
-            "Icon" = "8:"
+            "Icon" = "8:_352B525B47F346C1A3BA23AEA3838836"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5AA20A3FAF0F4649A90D19C29EE33F9B"
@@ -518,7 +544,7 @@
             "Target" = "8:_84C75FF6F70B449397150A08A3C22226"
             "Folder" = "8:_D39EEBD9691249CABEA670F8A0BD887C"
             "WorkingFolder" = "8:_048DA0FB160549DEA6C53ACCC83BFE5B"
-            "Icon" = "8:"
+            "Icon" = "8:_352B525B47F346C1A3BA23AEA3838836"
             "Feature" = "8:"
             }
         }
