@@ -12,9 +12,11 @@ section {
 	border: 1px solid black;
 }
 
-/*
-img {
-	width: 200px;
-	height: 200px;
+.breadcrumb {
+	margin-top: 50px;
+	margin-bottom: 0px;
 }
-*/
+
+#start {
+	margin-top: 0px;
+}
