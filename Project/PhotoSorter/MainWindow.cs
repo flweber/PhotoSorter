@@ -15,6 +15,8 @@ namespace PhotoSorter
 {
     public partial class MainTool : Form
     {
+        private Settings frmSettings;
+
         public MainTool()
         {
             InitializeComponent();
@@ -31,6 +33,10 @@ namespace PhotoSorter
             {
                 // Wenn es einen Fehler gibt wird die Version eben nicht angezeigt
             }
+            btn_Settings.TabStop = false;
+            btn_Settings.FlatStyle = FlatStyle.Flat;
+            btn_Settings.FlatAppearance.BorderSize = 0;
+            frmSettings = new Settings(this);
         }
 
         /// <summary>
@@ -100,13 +106,24 @@ namespace PhotoSorter
                         || file.ToLower().EndsWith(".raw"))
                     {
                         FileInfo fileInfo = new FileInfo(file);
-                        if(fileInfo.CreationTime.Date >= dtp_Vom.Value.Date && fileInfo.CreationTime.Date <= dtp_Bis.Value.Date)
+                        if((frmSettings.rb_CreationDate.Checked && fileInfo.CreationTime.Date >= dtp_Vom.Value.Date && fileInfo.CreationTime.Date <= dtp_Bis.Value.Date)
+                            || (frmSettings.rb_ModifiedatDate.Checked && fileInfo.LastWriteTime.Date >= dtp_Vom.Value.Date && fileInfo.LastWriteTime.Date <= dtp_Bis.Value.Date))
                         {
-                            if (!Directory.Exists(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy")))
+                            if (frmSettings.rb_CreationDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy")))
                                 Directory.CreateDirectory(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy"));
+                            else if(frmSettings.rb_ModifiedatDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.LastWriteTime.ToString("dd-MM-yyyy")))
+                                Directory.CreateDirectory(Zielpfad + "\\" + fileInfo.LastWriteTime.ToString("dd-MM-yyyy"));
 
                             n = 1;
-                            string fullfilepath = Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy") + "\\" + fileInfo.Name;
+                            string fullfilepath = Zielpfad + "\\";
+
+                            if (frmSettings.rb_CreationDate.Checked)
+                                fullfilepath += fileInfo.CreationTime.ToString("dd-MM-yyyy");
+                            else if (frmSettings.rb_ModifiedatDate.Checked)
+                                fullfilepath += fileInfo.LastWriteTime.ToString("dd-MM-yyyy");
+
+                            fullfilepath += "\\" + fileInfo.Name;
+
                             while (File.Exists(fullfilepath))
                             {
                                 string Filename = fileInfo.Name.Split('.')[0] + "-" + n + "." + fileInfo.Extension;
@@ -114,7 +131,10 @@ namespace PhotoSorter
                                 n++;
                             }
 
-                            File.Copy(file, fullfilepath);
+                            if (frmSettings.rb_Copy.Checked)
+                                File.Copy(file, fullfilepath);
+                            else if (frmSettings.rb_Cut.Checked)
+                                File.Move(file, fullfilepath);
                         }
                     }
                     double percent = ((double)counter / (double)files.Count) * (double)100;
@@ -152,6 +172,14 @@ namespace PhotoSorter
                 if (dialog == DialogResult.No)
                     e.Cancel = true;
             }
+        }
+
+        private void btn_Settings_Click(object sender, EventArgs e)
+        {
+            frmSettings.StartPosition = FormStartPosition.Manual;
+            frmSettings.Location = this.Location;
+            this.Enabled = false;
+            frmSettings.Show();
         }
     }
 }

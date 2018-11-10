@@ -47,6 +47,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lbl_prozentanzeige = new System.Windows.Forms.Label();
+            this.btn_Settings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dtp_Vom
@@ -165,7 +166,7 @@
             // btn_Start
             // 
             this.btn_Start.Enabled = false;
-            this.btn_Start.Location = new System.Drawing.Point(408, 227);
+            this.btn_Start.Location = new System.Drawing.Point(408, 237);
             this.btn_Start.Name = "btn_Start";
             this.btn_Start.Size = new System.Drawing.Size(75, 23);
             this.btn_Start.TabIndex = 13;
@@ -197,11 +198,23 @@
             this.lbl_prozentanzeige.Text = "label7";
             this.lbl_prozentanzeige.Visible = false;
             // 
+            // btn_Settings
+            // 
+            this.btn_Settings.BackgroundImage = global::PhotoSorter.Properties.Resources.if_Settings_black_192450;
+            this.btn_Settings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Settings.Location = new System.Drawing.Point(12, 227);
+            this.btn_Settings.Name = "btn_Settings";
+            this.btn_Settings.Size = new System.Drawing.Size(33, 33);
+            this.btn_Settings.TabIndex = 16;
+            this.btn_Settings.UseVisualStyleBackColor = true;
+            this.btn_Settings.Click += new System.EventHandler(this.btn_Settings_Click);
+            // 
             // MainTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 262);
+            this.ClientSize = new System.Drawing.Size(495, 268);
+            this.Controls.Add(this.btn_Settings);
             this.Controls.Add(this.lbl_prozentanzeige);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btn_Start);
@@ -250,6 +263,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lbl_prozentanzeige;
+        private System.Windows.Forms.Button btn_Settings;
     }
 }
 
