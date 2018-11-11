@@ -63,6 +63,26 @@ namespace PhotoSorter.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap if_back_left_arrow_botton_2203523 {
+            get {
+                object obj = ResourceManager.GetObject("if_back-left-arrow-botton_2203523", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap if_next_right_arrow_botton_2203522 {
+            get {
+                object obj = ResourceManager.GetObject("if_next-right-arrow-botton_2203522", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap if_Settings_black_192450 {
             get {
                 object obj = ResourceManager.GetObject("if_Settings_black_192450", resourceCulture);

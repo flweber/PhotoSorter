@@ -12,9 +12,11 @@ namespace PhotoSorter
 {
     public partial class Settings : Form
     {
-        private Form Sender;
+        private MainTool Sender;
+        private int Page;
+        private int maxPages;
 
-        public Settings(Form sender)
+        public Settings(MainTool sender)
         {
             InitializeComponent();
             btn_SortmodeHelp.TabStop = false;
@@ -24,6 +26,8 @@ namespace PhotoSorter
             btn_SortdateHelp.FlatStyle = FlatStyle.Flat;
             btn_SortdateHelp.FlatAppearance.BorderSize = 0;
             Sender = sender;
+            Page = 1;
+            maxPages = 2;
         }
 
         private void btn_SortmodeHelp_Click(object sender, EventArgs e)
@@ -34,7 +38,8 @@ namespace PhotoSorter
 
         private void btn_SortdateHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("", "Sortierdatum Definition", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Bei dem Erstelldatum handelt es sich um das Datum des Erstellens. Sollten Sie Bilder von Ihrem Smartphone kpoiert haben" +
+                "so empfiehlt es sich das Änderungsdatum zu wählen, da hier das Erstelldatum dann gleich dem Kopierdatum ist.", "Sortierdatum Definition", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,6 +53,54 @@ namespace PhotoSorter
             e.Cancel = true;
             Hide();
             Sender.Enabled = true;
+        }
+
+        private void ShowPage()
+        {
+            grp_DateType.Visible = false;
+            grp_Sortmode.Visible = false;
+            grp_FileSelection.Visible = false;
+            btn_Next.Enabled = false;
+            btn_Prev.Enabled = false;
+            switch (Page)
+            {
+                case 2:
+                    grp_FileSelection.Location = grp_Sortmode.Location;
+                    grp_FileSelection.Visible = true;
+                    btn_Prev.Enabled = true;
+                    break;
+                case 1:
+                default:
+                    grp_Sortmode.Visible = true;
+                    grp_DateType.Visible = true;
+                    btn_Next.Enabled = true;
+                    break;
+            }
+        }
+
+        private void btn_Next_Click(object sender, EventArgs e)
+        {
+            if ((Page + 1) <= maxPages)
+                Page++;
+            ShowPage();
+        }
+
+        private void btn_Prev_Click(object sender, EventArgs e)
+        {
+            if ((Page - 1) > 0)
+                Page--;
+            ShowPage();
+        }
+
+        private void btn_FileSelectionHelp_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rb_DateRange_CheckedChanged(object sender, EventArgs e)
+        {
+            Sender.dtp_Bis.Enabled = rb_DateRange.Checked;
+            Sender.dtp_Vom.Enabled = rb_DateRange.Checked;
         }
     }
 }

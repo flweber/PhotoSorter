@@ -57,8 +57,12 @@ namespace PhotoSorter
             btn_QuellWahl.Enabled = !backgroundWorker1.IsBusy;
             btn_Zielwahl.Enabled = !backgroundWorker1.IsBusy;
             txt_Urlaubsziel.Enabled = !backgroundWorker1.IsBusy;
-            dtp_Vom.Enabled = !backgroundWorker1.IsBusy;
-            dtp_Bis.Enabled = !backgroundWorker1.IsBusy;
+
+            if(frmSettings.rb_DateRange.Checked)
+            {
+                dtp_Vom.Enabled = !backgroundWorker1.IsBusy;
+                dtp_Bis.Enabled = !backgroundWorker1.IsBusy;
+            }
         }
 
         private void btn_QuellWahl_Click(object sender, EventArgs e)
@@ -107,7 +111,8 @@ namespace PhotoSorter
                     {
                         FileInfo fileInfo = new FileInfo(file);
                         if((frmSettings.rb_CreationDate.Checked && fileInfo.CreationTime.Date >= dtp_Vom.Value.Date && fileInfo.CreationTime.Date <= dtp_Bis.Value.Date)
-                            || (frmSettings.rb_ModifiedatDate.Checked && fileInfo.LastWriteTime.Date >= dtp_Vom.Value.Date && fileInfo.LastWriteTime.Date <= dtp_Bis.Value.Date))
+                            || (frmSettings.rb_ModifiedatDate.Checked && fileInfo.LastWriteTime.Date >= dtp_Vom.Value.Date && fileInfo.LastWriteTime.Date <= dtp_Bis.Value.Date) 
+                            || frmSettings.rb_AllImages.Checked)
                         {
                             if (frmSettings.rb_CreationDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy")))
                                 Directory.CreateDirectory(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy"));
