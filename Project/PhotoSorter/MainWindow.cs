@@ -186,5 +186,49 @@ namespace PhotoSorter
             this.Enabled = false;
             frmSettings.Show();
         }
+
+        private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/flweber/PhotoSorter/issues/new");
+        }
+
+        private void beendenAltF4ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void einstellungenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSettings.StartPosition = FormStartPosition.Manual;
+            frmSettings.Location = this.Location;
+            this.Enabled = false;
+            frmSettings.Show();
+        }
+
+        private void beendenAltF4ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                XmlDocument Local = new XmlDocument();
+                XmlDocument Web = new XmlDocument();
+                XmlNode lroot, wroot, lnode, wnode;
+                Local.Load(Path.Combine(Application.StartupPath, "version.xml"));
+                Web.Load("https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/update/version.xml");
+                lroot = Local.DocumentElement;
+                wroot = Web.DocumentElement;
+                lnode = lroot.SelectSingleNode("version");
+                wnode = wroot.SelectSingleNode("version");
+                string localVersion = lnode.InnerText;
+                string remoteVersion = wnode.InnerText;
+                if (!localVersion.Equals(remoteVersion))
+                    Process.Start("Updater.exe", "\"https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/update/\" \"Release.zip\" \"" + Application.StartupPath + "\" \"" + Application.ExecutablePath + "\" \"" + Process.GetCurrentProcess().Id + "\"");
+
+            }
+            catch
+            {
+                MessageBox.Show("Leider konnte der Update Prozess nicht gestartet werden." +
+                    Environment.NewLine + "Bitte gehen Sie über \"Hilfe --> Fehler melden\" um uns zu informieren.", "Updater Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

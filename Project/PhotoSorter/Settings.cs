@@ -25,6 +25,12 @@ namespace PhotoSorter
             btn_SortdateHelp.TabStop = false;
             btn_SortdateHelp.FlatStyle = FlatStyle.Flat;
             btn_SortdateHelp.FlatAppearance.BorderSize = 0;
+            btn_Next.TabStop = false;
+            btn_Next.FlatStyle = FlatStyle.Flat;
+            btn_Next.FlatAppearance.BorderSize = 0;
+            btn_Prev.TabStop = false;
+            btn_Prev.FlatStyle = FlatStyle.Flat;
+            btn_Prev.FlatAppearance.BorderSize = 0;
             Sender = sender;
             Page = 1;
             maxPages = 2;
