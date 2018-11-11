@@ -17,7 +17,7 @@ namespace PhotoSorter
         [STAThread]
         static void Main()
         {
-            //CheckforUpdates();
+            CheckforUpdates();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainTool());
