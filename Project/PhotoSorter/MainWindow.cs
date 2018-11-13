@@ -205,7 +205,9 @@ namespace PhotoSorter
             frmSettings.Show();
         }
 
-        private void beendenAltF4ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void beendenAltF4ToolStripMenuItem_Click(object sender, EventArgs e) => CheckForUpdate();
+
+        private void CheckForUpdate()
         {
             try
             {
@@ -221,14 +223,22 @@ namespace PhotoSorter
                 string localVersion = lnode.InnerText;
                 string remoteVersion = wnode.InnerText;
                 if (!localVersion.Equals(remoteVersion))
-                    Process.Start("Updater.exe", "\"https://s3.eu-central-1.amazonaws.com/flweber-github/PhotoSorter/update/\" \"Release.zip\" \"" + Application.StartupPath + "\" \"" + Application.ExecutablePath + "\" \"" + Process.GetCurrentProcess().Id + "\"");
-
+                {
+                    Program.UpdateViewer = new UpdateWindow(Web, this);
+                    Program.UpdateViewer.StartPosition = FormStartPosition.Manual;
+                    Program.UpdateViewer.Location = this.Location;
+                    Program.UpdateViewer.Show();
+                    Program.UpdateViewer.Activate();
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Leider konnte der Update Prozess nicht gestartet werden." +
-                    Environment.NewLine + "Bitte gehen Sie über \"Hilfe --> Fehler melden\" um uns zu informieren.", "Updater Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Leider konnte nicht auf Updates geprüft werden." +
+                    Environment.NewLine + ex.Message + Environment.NewLine + "Bitte gehen Sie über \"Hilfe --> Fehler melden\" um uns zu informieren.", "Updater Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void MainTool_Load(object sender, EventArgs e) => CheckForUpdate();
     }
 }

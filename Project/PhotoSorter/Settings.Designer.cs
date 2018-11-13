@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.grp_Sortmode = new System.Windows.Forms.GroupBox();
+            this.btn_SortmodeHelp = new System.Windows.Forms.Button();
+            this.rb_Cut = new System.Windows.Forms.RadioButton();
+            this.rb_Copy = new System.Windows.Forms.RadioButton();
             this.grp_FileSelection = new System.Windows.Forms.GroupBox();
             this.btn_FileSelectionHelp = new System.Windows.Forms.Button();
             this.rb_AllImages = new System.Windows.Forms.RadioButton();
             this.rb_DateRange = new System.Windows.Forms.RadioButton();
-            this.btn_SortmodeHelp = new System.Windows.Forms.Button();
-            this.rb_Cut = new System.Windows.Forms.RadioButton();
-            this.rb_Copy = new System.Windows.Forms.RadioButton();
             this.grp_DateType = new System.Windows.Forms.GroupBox();
             this.btn_SortdateHelp = new System.Windows.Forms.Button();
             this.rb_ModifiedatDate = new System.Windows.Forms.RadioButton();
@@ -59,6 +60,40 @@
             this.grp_Sortmode.TabIndex = 0;
             this.grp_Sortmode.TabStop = false;
             this.grp_Sortmode.Text = "Sortiermodus";
+            // 
+            // btn_SortmodeHelp
+            // 
+            this.btn_SortmodeHelp.BackColor = System.Drawing.Color.Transparent;
+            this.btn_SortmodeHelp.BackgroundImage = global::PhotoSorter.Properties.Resources.qOXqp;
+            this.btn_SortmodeHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_SortmodeHelp.Location = new System.Drawing.Point(165, 30);
+            this.btn_SortmodeHelp.Name = "btn_SortmodeHelp";
+            this.btn_SortmodeHelp.Size = new System.Drawing.Size(29, 29);
+            this.btn_SortmodeHelp.TabIndex = 2;
+            this.btn_SortmodeHelp.UseVisualStyleBackColor = false;
+            this.btn_SortmodeHelp.Click += new System.EventHandler(this.btn_SortmodeHelp_Click);
+            // 
+            // rb_Cut
+            // 
+            this.rb_Cut.AutoSize = true;
+            this.rb_Cut.Location = new System.Drawing.Point(7, 53);
+            this.rb_Cut.Name = "rb_Cut";
+            this.rb_Cut.Size = new System.Drawing.Size(92, 17);
+            this.rb_Cut.TabIndex = 1;
+            this.rb_Cut.Text = "Ausschneiden";
+            this.rb_Cut.UseVisualStyleBackColor = true;
+            // 
+            // rb_Copy
+            // 
+            this.rb_Copy.AutoSize = true;
+            this.rb_Copy.Checked = true;
+            this.rb_Copy.Location = new System.Drawing.Point(6, 19);
+            this.rb_Copy.Name = "rb_Copy";
+            this.rb_Copy.Size = new System.Drawing.Size(67, 17);
+            this.rb_Copy.TabIndex = 0;
+            this.rb_Copy.TabStop = true;
+            this.rb_Copy.Text = "Kopieren";
+            this.rb_Copy.UseVisualStyleBackColor = true;
             // 
             // grp_FileSelection
             // 
@@ -107,40 +142,6 @@
             this.rb_DateRange.Text = "Datumsbereich";
             this.rb_DateRange.UseVisualStyleBackColor = true;
             this.rb_DateRange.CheckedChanged += new System.EventHandler(this.rb_DateRange_CheckedChanged);
-            // 
-            // btn_SortmodeHelp
-            // 
-            this.btn_SortmodeHelp.BackColor = System.Drawing.Color.Transparent;
-            this.btn_SortmodeHelp.BackgroundImage = global::PhotoSorter.Properties.Resources.qOXqp;
-            this.btn_SortmodeHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_SortmodeHelp.Location = new System.Drawing.Point(165, 30);
-            this.btn_SortmodeHelp.Name = "btn_SortmodeHelp";
-            this.btn_SortmodeHelp.Size = new System.Drawing.Size(29, 29);
-            this.btn_SortmodeHelp.TabIndex = 2;
-            this.btn_SortmodeHelp.UseVisualStyleBackColor = false;
-            this.btn_SortmodeHelp.Click += new System.EventHandler(this.btn_SortmodeHelp_Click);
-            // 
-            // rb_Cut
-            // 
-            this.rb_Cut.AutoSize = true;
-            this.rb_Cut.Location = new System.Drawing.Point(7, 53);
-            this.rb_Cut.Name = "rb_Cut";
-            this.rb_Cut.Size = new System.Drawing.Size(92, 17);
-            this.rb_Cut.TabIndex = 1;
-            this.rb_Cut.Text = "Ausschneiden";
-            this.rb_Cut.UseVisualStyleBackColor = true;
-            // 
-            // rb_Copy
-            // 
-            this.rb_Copy.AutoSize = true;
-            this.rb_Copy.Checked = true;
-            this.rb_Copy.Location = new System.Drawing.Point(6, 19);
-            this.rb_Copy.Name = "rb_Copy";
-            this.rb_Copy.Size = new System.Drawing.Size(67, 17);
-            this.rb_Copy.TabIndex = 0;
-            this.rb_Copy.TabStop = true;
-            this.rb_Copy.Text = "Kopieren";
-            this.rb_Copy.UseVisualStyleBackColor = true;
             // 
             // grp_DateType
             // 
@@ -233,7 +234,9 @@
             this.Controls.Add(this.grp_DateType);
             this.Controls.Add(this.grp_Sortmode);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Settings";
+            this.ShowInTaskbar = false;
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Settings_FormClosing);
             this.grp_Sortmode.ResumeLayout(false);

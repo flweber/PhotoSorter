@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <PhotoSorter>
-  <version>1.2.1.1</version>
+  <version>1.2.2.1</version>
   <description>
     Da man keine Verzeichnisse von Smartphones auswählen kann haben wir nun die Möglichkeit eingebaut nach dem Änderungsdatum zu Sortieren.
     Außerdem ist es nun möglich einzustellen, ob man die Quelldateien behalten möchte oder nicht.
+    Zudem haben wir uns dazu entschieden, Sie ab dieser Version nicht mehr zu den Updates zu zwingen, indem nun ein kleines Fenster eingebaut haben,
+    in welchem Sie die Neuerungen sehen können und selbst wählen können, ob Sie diese brauchen oder nicht.
   </description>
-  <updateDate>11.11.2018</updateDate>
+  <updateDate>13.11.2018</updateDate>
 </PhotoSorter>

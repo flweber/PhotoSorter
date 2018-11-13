@@ -52,8 +52,8 @@
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenAltF4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenAltF4ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fehlerMeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -241,16 +241,23 @@
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.einstellungenToolStripMenuItem.Text = "Einstellungen";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
             // 
             // beendenAltF4ToolStripMenuItem
             // 
             this.beendenAltF4ToolStripMenuItem.Name = "beendenAltF4ToolStripMenuItem";
-            this.beendenAltF4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beendenAltF4ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.beendenAltF4ToolStripMenuItem.Text = "Updates suchen";
             this.beendenAltF4ToolStripMenuItem.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem_Click);
+            // 
+            // beendenAltF4ToolStripMenuItem1
+            // 
+            this.beendenAltF4ToolStripMenuItem1.Name = "beendenAltF4ToolStripMenuItem1";
+            this.beendenAltF4ToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.beendenAltF4ToolStripMenuItem1.Text = "Beenden Alt+F4";
+            this.beendenAltF4ToolStripMenuItem1.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem1_Click);
             // 
             // hilfeToolStripMenuItem
             // 
@@ -260,17 +267,10 @@
             this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.hilfeToolStripMenuItem.Text = "Hilfe";
             // 
-            // beendenAltF4ToolStripMenuItem1
-            // 
-            this.beendenAltF4ToolStripMenuItem1.Name = "beendenAltF4ToolStripMenuItem1";
-            this.beendenAltF4ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.beendenAltF4ToolStripMenuItem1.Text = "Beenden Alt+F4";
-            this.beendenAltF4ToolStripMenuItem1.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem1_Click);
-            // 
             // fehlerMeldenToolStripMenuItem
             // 
             this.fehlerMeldenToolStripMenuItem.Name = "fehlerMeldenToolStripMenuItem";
-            this.fehlerMeldenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fehlerMeldenToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.fehlerMeldenToolStripMenuItem.Text = "Fehler melden";
             this.fehlerMeldenToolStripMenuItem.Click += new System.EventHandler(this.fehlerMeldenToolStripMenuItem_Click);
             // 
@@ -305,6 +305,7 @@
             this.ShowIcon = false;
             this.Text = "Photo Sorter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainTool_FormClosing);
+            this.Load += new System.EventHandler(this.MainTool_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

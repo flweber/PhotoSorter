@@ -11,13 +11,15 @@ namespace PhotoSorter
 {
     static class Program
     {
+        internal static UpdateWindow UpdateViewer;
+
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            CheckforUpdates();
+            //CheckforUpdates();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainTool());
