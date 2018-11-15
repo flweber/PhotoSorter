@@ -74,15 +74,15 @@ namespace PhotoSorter
             switch (Page)
             {
                 case 2:
-                    grp_FileSelection.Location = grp_Sortmode.Location;
+                    grp_FileSelection.Location = grp_DateType.Location;
                     grp_FileSelection.Visible = true;
-                    grp_SelectLanguage.Location = grp_DateType.Location;
-                    grp_SelectLanguage.Visible = true;
+                    grp_Sortmode.Visible = true;
                     btn_Prev.Enabled = true;
                     break;
                 case 1:
                 default:
-                    grp_Sortmode.Visible = true;
+                    grp_SelectLanguage.Location = grp_Sortmode.Location;
+                    grp_SelectLanguage.Visible = true;
                     grp_DateType.Visible = true;
                     btn_Next.Enabled = true;
                     break;
@@ -130,6 +130,7 @@ namespace PhotoSorter
                 rb_German.Checked = false;
                 rb_English.Checked = true;
             }
+            ShowPage();
         }
 
         private void SetLanguage()
