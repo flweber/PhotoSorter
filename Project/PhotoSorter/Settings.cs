@@ -51,14 +51,12 @@ namespace PhotoSorter
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Sender.Enabled = true;
         }
 
         private void Settings_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             Hide();
-            Sender.Enabled = true;
         }
 
         private void ShowPage()
@@ -66,6 +64,7 @@ namespace PhotoSorter
             grp_DateType.Visible = false;
             grp_Sortmode.Visible = false;
             grp_FileSelection.Visible = false;
+            grp_SelectLanguage.Visible = false;
             btn_Next.Enabled = false;
             btn_Prev.Enabled = false;
             switch (Page)
@@ -73,6 +72,8 @@ namespace PhotoSorter
                 case 2:
                     grp_FileSelection.Location = grp_Sortmode.Location;
                     grp_FileSelection.Visible = true;
+                    grp_SelectLanguage.Location = grp_DateType.Location;
+                    grp_SelectLanguage.Visible = true;
                     btn_Prev.Enabled = true;
                     break;
                 case 1:
@@ -107,6 +108,57 @@ namespace PhotoSorter
         {
             Sender.dtp_Bis.Enabled = rb_DateRange.Checked;
             Sender.dtp_Vom.Enabled = rb_DateRange.Checked;
+        }
+
+        private void rb_German_CheckedChanged(object sender, EventArgs e) => SetLanguage();
+
+        private void rb_English_CheckedChanged(object sender, EventArgs e) => SetLanguage();
+
+        private void Settings_Load(object sender, EventArgs e)
+        {
+            if ((rb_German.Checked || Program.ci.TwoLetterISOLanguageName.Equals("de")) && !rb_English.Checked)
+            {
+                rb_English.Checked = false;
+                rb_German.Checked = true;
+            }
+            else
+            {
+                rb_German.Checked = false;
+                rb_English.Checked = true;
+            }
+        }
+
+        private void SetLanguage()
+        {
+            if ((rb_German.Checked || Program.ci.TwoLetterISOLanguageName.Equals("de")) && !rb_English.Checked)
+            {
+                grp_DateType.Text = "Sortierdatum";
+                grp_FileSelection.Text = "Bildauswahl";
+                grp_SelectLanguage.Text = "Sprache";
+                grp_Sortmode.Text = "Sortiermodus";
+                rb_AllImages.Text = "Alle Bilder";
+                rb_Copy.Text = "Kopieren";
+                rb_CreationDate.Text = "Erstelldatum";
+                rb_Cut.Text = "Ausschneiden";
+                rb_DateRange.Text = "Datumsbereich";
+                rb_ModifiedatDate.Text = "Bearbeitungsdatum";
+                Text = "Einstellungen";
+            }
+            else
+            {
+                grp_DateType.Text = "Sort Date";
+                grp_FileSelection.Text = "Files to copy";
+                grp_SelectLanguage.Text = "Language";
+                grp_Sortmode.Text = "Sortmode";
+                rb_AllImages.Text = "All Images";
+                rb_Copy.Text = "Copy";
+                rb_CreationDate.Text = "Creation Date";
+                rb_Cut.Text = "Cut";
+                rb_DateRange.Text = "Date Range";
+                rb_ModifiedatDate.Text = "Modification Date";
+                Text = "Settings";
+            }
+            Sender.SetLanguage();
         }
     }
 }

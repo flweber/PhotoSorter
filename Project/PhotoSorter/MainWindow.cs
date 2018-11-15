@@ -183,8 +183,7 @@ namespace PhotoSorter
         {
             frmSettings.StartPosition = FormStartPosition.Manual;
             frmSettings.Location = this.Location;
-            this.Enabled = false;
-            frmSettings.Show();
+            frmSettings.ShowDialog();
         }
 
         private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -224,10 +223,10 @@ namespace PhotoSorter
                 string remoteVersion = wnode.InnerText;
                 if (!localVersion.Equals(remoteVersion))
                 {
-                    Program.UpdateViewer = new UpdateWindow(Web, this);
+                    Program.UpdateViewer = new UpdateWindow(Web);
                     Program.UpdateViewer.StartPosition = FormStartPosition.Manual;
                     Program.UpdateViewer.Location = this.Location;
-                    Program.UpdateViewer.Show();
+                    Program.UpdateViewer.ShowDialog();
                     Program.UpdateViewer.Activate();
                 }
             }
@@ -239,6 +238,48 @@ namespace PhotoSorter
             }
         }
 
-        private void MainTool_Load(object sender, EventArgs e) => CheckForUpdate();
+        private void MainTool_Load(object sender, EventArgs e)
+        {
+            CheckForUpdate();
+            SetLanguage();
+        }
+
+        internal void SetLanguage()
+        {
+            if ((Program.ci.TwoLetterISOLanguageName.Equals("de") || frmSettings.rb_German.Checked) && !frmSettings.rb_English.Checked)
+            {
+                label1.Text = "Vom";
+                label2.Text = "bis";
+                label3.Text = "Urlaubsbilder Sortierer";
+                label4.Text = "Quellordner:";
+                label5.Text = "Zielornder:";
+                label6.Text = "Urlaubsziel:";
+                btn_QuellWahl.Text = "Auswählen";
+                btn_Zielwahl.Text = "Auswählen";
+                dateiToolStripMenuItem.Text = "Datei";
+                einstellungenToolStripMenuItem.Text = "Einstellungen";
+                beendenAltF4ToolStripMenuItem.Text = "Updates suchen";
+                beendenAltF4ToolStripMenuItem1.Text = "Beenden \t Alt+F4";
+                hilfeToolStripMenuItem.Text = "Hilfe";
+                fehlerMeldenToolStripMenuItem.Text = "Fehler melden";
+            }
+            else
+            {
+                label1.Text = "From";
+                label2.Text = "to";
+                label3.Text = "Photo Sorter";
+                label4.Text = "Source:";
+                label5.Text = "Destination:";
+                label6.Text = "Foldername:";
+                btn_QuellWahl.Text = "Select";
+                btn_Zielwahl.Text = "Select";
+                dateiToolStripMenuItem.Text = "File";
+                einstellungenToolStripMenuItem.Text = "Settings";
+                beendenAltF4ToolStripMenuItem.Text = "Search for Updates";
+                beendenAltF4ToolStripMenuItem1.Text = "Quit \t Alt+F4";
+                hilfeToolStripMenuItem.Text = "Help";
+                fehlerMeldenToolStripMenuItem.Text = "Report Issue";
+            }
+        }
     }
 }

@@ -44,9 +44,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btn_Prev = new System.Windows.Forms.Button();
             this.btn_Next = new System.Windows.Forms.Button();
+            this.grp_SelectLanguage = new System.Windows.Forms.GroupBox();
+            this.rb_German = new System.Windows.Forms.RadioButton();
+            this.rb_English = new System.Windows.Forms.RadioButton();
             this.grp_Sortmode.SuspendLayout();
             this.grp_FileSelection.SuspendLayout();
             this.grp_DateType.SuspendLayout();
+            this.grp_SelectLanguage.SuspendLayout();
             this.SuspendLayout();
             // 
             // grp_Sortmode
@@ -100,7 +104,7 @@
             this.grp_FileSelection.Controls.Add(this.btn_FileSelectionHelp);
             this.grp_FileSelection.Controls.Add(this.rb_AllImages);
             this.grp_FileSelection.Controls.Add(this.rb_DateRange);
-            this.grp_FileSelection.Location = new System.Drawing.Point(123, 113);
+            this.grp_FileSelection.Location = new System.Drawing.Point(41, 113);
             this.grp_FileSelection.Name = "grp_FileSelection";
             this.grp_FileSelection.Size = new System.Drawing.Size(200, 85);
             this.grp_FileSelection.TabIndex = 3;
@@ -204,7 +208,7 @@
             this.btn_Prev.BackgroundImage = global::PhotoSorter.Properties.Resources.if_back_left_arrow_botton_2203523;
             this.btn_Prev.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_Prev.Enabled = false;
-            this.btn_Prev.Location = new System.Drawing.Point(12, 98);
+            this.btn_Prev.Location = new System.Drawing.Point(13, 98);
             this.btn_Prev.Name = "btn_Prev";
             this.btn_Prev.Size = new System.Drawing.Size(23, 23);
             this.btn_Prev.TabIndex = 4;
@@ -222,11 +226,48 @@
             this.btn_Next.UseVisualStyleBackColor = true;
             this.btn_Next.Click += new System.EventHandler(this.btn_Next_Click);
             // 
+            // grp_SelectLanguage
+            // 
+            this.grp_SelectLanguage.Controls.Add(this.rb_English);
+            this.grp_SelectLanguage.Controls.Add(this.rb_German);
+            this.grp_SelectLanguage.Location = new System.Drawing.Point(247, 113);
+            this.grp_SelectLanguage.Name = "grp_SelectLanguage";
+            this.grp_SelectLanguage.Size = new System.Drawing.Size(200, 85);
+            this.grp_SelectLanguage.TabIndex = 4;
+            this.grp_SelectLanguage.TabStop = false;
+            this.grp_SelectLanguage.Text = "Sprache";
+            this.grp_SelectLanguage.Visible = false;
+            // 
+            // rb_German
+            // 
+            this.rb_German.AutoSize = true;
+            this.rb_German.Location = new System.Drawing.Point(7, 19);
+            this.rb_German.Name = "rb_German";
+            this.rb_German.Size = new System.Drawing.Size(65, 17);
+            this.rb_German.TabIndex = 0;
+            this.rb_German.TabStop = true;
+            this.rb_German.Text = "Deutsch";
+            this.rb_German.UseVisualStyleBackColor = true;
+            this.rb_German.CheckedChanged += new System.EventHandler(this.rb_German_CheckedChanged);
+            // 
+            // rb_English
+            // 
+            this.rb_English.AutoSize = true;
+            this.rb_English.Location = new System.Drawing.Point(7, 53);
+            this.rb_English.Name = "rb_English";
+            this.rb_English.Size = new System.Drawing.Size(59, 17);
+            this.rb_English.TabIndex = 1;
+            this.rb_English.TabStop = true;
+            this.rb_English.Text = "English";
+            this.rb_English.UseVisualStyleBackColor = true;
+            this.rb_English.CheckedChanged += new System.EventHandler(this.rb_English_CheckedChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(428, 153);
+            this.Controls.Add(this.grp_SelectLanguage);
             this.Controls.Add(this.grp_FileSelection);
             this.Controls.Add(this.btn_Prev);
             this.Controls.Add(this.btn_Next);
@@ -239,12 +280,15 @@
             this.ShowInTaskbar = false;
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Settings_FormClosing);
+            this.Load += new System.EventHandler(this.Settings_Load);
             this.grp_Sortmode.ResumeLayout(false);
             this.grp_Sortmode.PerformLayout();
             this.grp_FileSelection.ResumeLayout(false);
             this.grp_FileSelection.PerformLayout();
             this.grp_DateType.ResumeLayout(false);
             this.grp_DateType.PerformLayout();
+            this.grp_SelectLanguage.ResumeLayout(false);
+            this.grp_SelectLanguage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -266,5 +310,8 @@
         private System.Windows.Forms.Button btn_FileSelectionHelp;
         internal System.Windows.Forms.RadioButton rb_AllImages;
         internal System.Windows.Forms.RadioButton rb_DateRange;
+        private System.Windows.Forms.GroupBox grp_SelectLanguage;
+        internal System.Windows.Forms.RadioButton rb_English;
+        internal System.Windows.Forms.RadioButton rb_German;
     }
 }
