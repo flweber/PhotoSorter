@@ -15,6 +15,9 @@ namespace PhotoSorter
         private MainTool Sender;
         private int Page;
         private int maxPages;
+        private string SortmodeHelp;
+        private string SortdateHelp;
+        private string FileSelectionHelp;
 
         public Settings(MainTool sender)
         {
@@ -31,6 +34,9 @@ namespace PhotoSorter
             btn_Prev.TabStop = false;
             btn_Prev.FlatStyle = FlatStyle.Flat;
             btn_Prev.FlatAppearance.BorderSize = 0;
+            btn_FileSelectionHelp.TabStop = false;
+            btn_FileSelectionHelp.FlatStyle = FlatStyle.Flat;
+            btn_FileSelectionHelp.FlatAppearance.BorderSize = 0;
             Sender = sender;
             Page = 1;
             maxPages = 2;
@@ -38,14 +44,12 @@ namespace PhotoSorter
 
         private void btn_SortmodeHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Kopieren: Die Dateien werden im Zielverzeichnis sortiert, allerdings bleiben die Dateien auch im Quellverzeichnis erhalten." + Environment.NewLine + "Ausschneiden:" +
-                " Die Dateien werden im Zielverzeichnis sortiert und im Quellverzeichnis gelöscht.", "Sortiermodus Definition", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(SortmodeHelp, "Sortiermodus Definition", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btn_SortdateHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Bei dem Erstelldatum handelt es sich um das Datum des Erstellens. Sollten Sie Bilder von Ihrem Smartphone kpoiert haben" +
-                "so empfiehlt es sich das Änderungsdatum zu wählen, da hier das Erstelldatum dann gleich dem Kopierdatum ist.", "Sortierdatum Definition", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(SortdateHelp, "Sortierdatum Definition", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -101,7 +105,7 @@ namespace PhotoSorter
 
         private void btn_FileSelectionHelp_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show(FileSelectionHelp, "Dateiauswahl", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void rb_DateRange_CheckedChanged(object sender, EventArgs e)
@@ -143,6 +147,11 @@ namespace PhotoSorter
                 rb_DateRange.Text = "Datumsbereich";
                 rb_ModifiedatDate.Text = "Bearbeitungsdatum";
                 Text = "Einstellungen";
+                SortmodeHelp = "Kopieren: Die Dateien werden im Zielverzeichnis sortiert, allerdings bleiben die Dateien auch im Quellverzeichnis erhalten." + Environment.NewLine + "Ausschneiden:" +
+                " Die Dateien werden im Zielverzeichnis sortiert und im Quellverzeichnis gelöscht.";
+                SortdateHelp = "Bei dem Erstelldatum handelt es sich um das Datum des Erstellens. Sollten Sie Bilder von Ihrem Smartphone oder Ihrer Kamera kopiert haben" +
+                " so empfiehlt es sich das Änderungsdatum zu wählen, da hier das Erstelldatum dann gleich dem Kopierdatum ist.";
+                FileSelectionHelp = "Datumsbereich: Kopiert alle Bilder im gewählten Zeitraum." + Environment.NewLine + "Alle Bilder: Kopiert alle Bilder, welche sich im Quellverzeichnis befinden.";
             }
             else
             {
@@ -157,6 +166,10 @@ namespace PhotoSorter
                 rb_DateRange.Text = "Date Range";
                 rb_ModifiedatDate.Text = "Modification Date";
                 Text = "Settings";
+                SortmodeHelp = "Copy: The files will be sorted in the destination directory and will be stay in the source directory." + Environment.NewLine +
+                    "Cut: The files will be deleted from the source directory and can only be found in the destiantion directory.";
+                SortdateHelp = "If you have copied pictures from your smartphone or camera you should use the modified date because the creation date will be the date of copy.";
+                FileSelectionHelp = "Date Range: Will copy all images in the selected date range." + Environment.NewLine + "All Images: Will copy all images from the source diretory.";
             }
             Sender.SetLanguage();
         }

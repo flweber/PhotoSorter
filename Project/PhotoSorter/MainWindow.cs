@@ -16,6 +16,9 @@ namespace PhotoSorter
     public partial class MainTool : Form
     {
         private Settings frmSettings;
+        private string updateError;
+        private string runningProcessWarning;
+        private string processError;
 
         public MainTool()
         {
@@ -149,7 +152,7 @@ namespace PhotoSorter
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Leider konnte der Prozess nicht ausgeführt werden." + Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(processError + Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -160,7 +163,11 @@ namespace PhotoSorter
             Kontrolle();
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => Kontrolle();
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+            Kontrolle();
+        }
 
         private void btn_Start_Click(object sender, EventArgs e)
         {
@@ -173,7 +180,7 @@ namespace PhotoSorter
         {
             if (backgroundWorker1.IsBusy)
             {
-                DialogResult dialog = MessageBox.Show("Der Prozess wird noch ausgeführt." + Environment.NewLine + "Wollen Sie den Prozess wirklich abbrechen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dialog = MessageBox.Show(runningProcessWarning, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialog == DialogResult.No)
                     e.Cancel = true;
             }
@@ -232,8 +239,7 @@ namespace PhotoSorter
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Leider konnte nicht auf Updates geprüft werden." +
-                    Environment.NewLine + ex.Message + Environment.NewLine + "Bitte gehen Sie über \"Hilfe --> Fehler melden\" um uns zu informieren.", "Updater Error",
+                MessageBox.Show(updateError + Environment.NewLine + ex.Message, "Updater Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -262,6 +268,10 @@ namespace PhotoSorter
                 beendenAltF4ToolStripMenuItem1.Text = "Beenden \t Alt+F4";
                 hilfeToolStripMenuItem.Text = "Hilfe";
                 fehlerMeldenToolStripMenuItem.Text = "Fehler melden";
+                updateError = "Leider konnte nicht auf Updates geprüft werden." +
+                    Environment.NewLine + "Bitte gehen Sie über \"Hilfe --> Fehler melden\" um uns zu informieren.";
+                processError = "Leider konnte der Prozess nicht ausgeführt werden.";
+                runningProcessWarning = "Der Prozess wird noch ausgeführt." + Environment.NewLine + "Wollen Sie den Prozess wirklich abbrechen?";
             }
             else
             {
@@ -279,6 +289,10 @@ namespace PhotoSorter
                 beendenAltF4ToolStripMenuItem1.Text = "Quit \t Alt+F4";
                 hilfeToolStripMenuItem.Text = "Help";
                 fehlerMeldenToolStripMenuItem.Text = "Report Issue";
+                updateError = "Unfortunately we could not check for updates." +
+                    Environment.NewLine + "Please click \"Help --> Report Issue\" to inform us.";
+                processError = "Unfortunately the process could'nt run";
+                runningProcessWarning = "The programme is working." + Environment.NewLine + "Do you really want to cancel the running process?";
             }
         }
     }
