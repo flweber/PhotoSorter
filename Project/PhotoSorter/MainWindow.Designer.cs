@@ -118,7 +118,7 @@
             // 
             // btn_QuellWahl
             // 
-            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 94);
+            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 97);
             this.btn_QuellWahl.Name = "btn_QuellWahl";
             this.btn_QuellWahl.Size = new System.Drawing.Size(75, 20);
             this.btn_QuellWahl.TabIndex = 7;
@@ -241,21 +241,21 @@
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.einstellungenToolStripMenuItem.Text = "Einstellungen";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
             // 
             // beendenAltF4ToolStripMenuItem
             // 
             this.beendenAltF4ToolStripMenuItem.Name = "beendenAltF4ToolStripMenuItem";
-            this.beendenAltF4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beendenAltF4ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.beendenAltF4ToolStripMenuItem.Text = "Updates suchen";
             this.beendenAltF4ToolStripMenuItem.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem_Click);
             // 
             // beendenAltF4ToolStripMenuItem1
             // 
             this.beendenAltF4ToolStripMenuItem1.Name = "beendenAltF4ToolStripMenuItem1";
-            this.beendenAltF4ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.beendenAltF4ToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
             this.beendenAltF4ToolStripMenuItem1.Text = "Beenden Alt+F4";
             this.beendenAltF4ToolStripMenuItem1.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem1_Click);
             // 
