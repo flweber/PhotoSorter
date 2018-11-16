@@ -19,6 +19,7 @@ namespace PhotoSorter
         private string updateError;
         private string runningProcessWarning;
         private string processError;
+        private string processfinished;
 
         public MainTool()
         {
@@ -165,7 +166,7 @@ namespace PhotoSorter
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            MessageBox.Show(processfinished, "Fertig", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Kontrolle();
         }
 
@@ -272,7 +273,8 @@ namespace PhotoSorter
                     Environment.NewLine + "Bitte gehen Sie über \"Hilfe --> Fehler melden\" um uns zu informieren.";
                 processError = "Leider konnte der Prozess nicht ausgeführt werden.";
                 runningProcessWarning = "Der Prozess wird noch ausgeführt." + Environment.NewLine + "Wollen Sie den Prozess wirklich abbrechen?";
-            }
+                processfinished = "Der Prozess wurde ausgeführt";
+                }
             else
             {
                 label1.Text = "From";
@@ -293,6 +295,7 @@ namespace PhotoSorter
                     Environment.NewLine + "Please click \"Help --> Report Issue\" to inform us.";
                 processError = "Unfortunately the process could'nt run";
                 runningProcessWarning = "The programme is working." + Environment.NewLine + "Do you really want to cancel the running process?";
+                processfinished = "The process has finished";
             }
         }
     }
