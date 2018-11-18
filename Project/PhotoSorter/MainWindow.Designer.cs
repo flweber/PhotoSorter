@@ -47,11 +47,20 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lbl_prozentanzeige = new System.Windows.Forms.Label();
+            this.btn_Settings = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beendenAltF4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beendenAltF4ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fehlerMeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dtp_Vom
             // 
-            this.dtp_Vom.Location = new System.Drawing.Point(51, 40);
+            this.dtp_Vom.Location = new System.Drawing.Point(51, 55);
             this.dtp_Vom.Name = "dtp_Vom";
             this.dtp_Vom.Size = new System.Drawing.Size(200, 20);
             this.dtp_Vom.TabIndex = 0;
@@ -59,7 +68,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 42);
+            this.label1.Location = new System.Drawing.Point(17, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 1;
@@ -68,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(257, 42);
+            this.label2.Location = new System.Drawing.Point(257, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(20, 13);
             this.label2.TabIndex = 2;
@@ -76,7 +85,7 @@
             // 
             // dtp_Bis
             // 
-            this.dtp_Bis.Location = new System.Drawing.Point(283, 40);
+            this.dtp_Bis.Location = new System.Drawing.Point(283, 55);
             this.dtp_Bis.Name = "dtp_Bis";
             this.dtp_Bis.Size = new System.Drawing.Size(200, 20);
             this.dtp_Bis.TabIndex = 3;
@@ -85,7 +94,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 9);
+            this.label3.Location = new System.Drawing.Point(12, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(190, 20);
             this.label3.TabIndex = 4;
@@ -93,7 +102,7 @@
             // 
             // txt_Quelle
             // 
-            this.txt_Quelle.Location = new System.Drawing.Point(77, 83);
+            this.txt_Quelle.Location = new System.Drawing.Point(77, 98);
             this.txt_Quelle.Name = "txt_Quelle";
             this.txt_Quelle.ReadOnly = true;
             this.txt_Quelle.Size = new System.Drawing.Size(174, 20);
@@ -101,7 +110,7 @@
             // 
             // txt_Ziel
             // 
-            this.txt_Ziel.Location = new System.Drawing.Point(77, 129);
+            this.txt_Ziel.Location = new System.Drawing.Point(77, 144);
             this.txt_Ziel.Name = "txt_Ziel";
             this.txt_Ziel.ReadOnly = true;
             this.txt_Ziel.Size = new System.Drawing.Size(174, 20);
@@ -109,7 +118,7 @@
             // 
             // btn_QuellWahl
             // 
-            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 79);
+            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 97);
             this.btn_QuellWahl.Name = "btn_QuellWahl";
             this.btn_QuellWahl.Size = new System.Drawing.Size(75, 20);
             this.btn_QuellWahl.TabIndex = 7;
@@ -119,7 +128,7 @@
             // 
             // btn_Zielwahl
             // 
-            this.btn_Zielwahl.Location = new System.Drawing.Point(260, 129);
+            this.btn_Zielwahl.Location = new System.Drawing.Point(260, 144);
             this.btn_Zielwahl.Name = "btn_Zielwahl";
             this.btn_Zielwahl.Size = new System.Drawing.Size(75, 20);
             this.btn_Zielwahl.TabIndex = 8;
@@ -130,7 +139,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 86);
+            this.label4.Location = new System.Drawing.Point(13, 101);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 13);
             this.label4.TabIndex = 9;
@@ -139,7 +148,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 132);
+            this.label5.Location = new System.Drawing.Point(13, 147);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 10;
@@ -148,7 +157,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 168);
+            this.label6.Location = new System.Drawing.Point(9, 183);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(61, 13);
             this.label6.TabIndex = 11;
@@ -156,7 +165,7 @@
             // 
             // txt_Urlaubsziel
             // 
-            this.txt_Urlaubsziel.Location = new System.Drawing.Point(77, 165);
+            this.txt_Urlaubsziel.Location = new System.Drawing.Point(77, 180);
             this.txt_Urlaubsziel.Name = "txt_Urlaubsziel";
             this.txt_Urlaubsziel.Size = new System.Drawing.Size(174, 20);
             this.txt_Urlaubsziel.TabIndex = 12;
@@ -165,7 +174,7 @@
             // btn_Start
             // 
             this.btn_Start.Enabled = false;
-            this.btn_Start.Location = new System.Drawing.Point(408, 227);
+            this.btn_Start.Location = new System.Drawing.Point(408, 252);
             this.btn_Start.Name = "btn_Start";
             this.btn_Start.Size = new System.Drawing.Size(75, 23);
             this.btn_Start.TabIndex = 13;
@@ -182,7 +191,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 198);
+            this.progressBar1.Location = new System.Drawing.Point(12, 213);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(471, 23);
             this.progressBar1.TabIndex = 14;
@@ -190,18 +199,87 @@
             // lbl_prozentanzeige
             // 
             this.lbl_prozentanzeige.AutoSize = true;
-            this.lbl_prozentanzeige.Location = new System.Drawing.Point(432, 179);
+            this.lbl_prozentanzeige.Location = new System.Drawing.Point(432, 194);
             this.lbl_prozentanzeige.Name = "lbl_prozentanzeige";
             this.lbl_prozentanzeige.Size = new System.Drawing.Size(35, 13);
             this.lbl_prozentanzeige.TabIndex = 15;
             this.lbl_prozentanzeige.Text = "label7";
             this.lbl_prozentanzeige.Visible = false;
             // 
+            // btn_Settings
+            // 
+            this.btn_Settings.BackgroundImage = global::PhotoSorter.Properties.Resources.if_Settings_black_192450;
+            this.btn_Settings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Settings.Location = new System.Drawing.Point(12, 242);
+            this.btn_Settings.Name = "btn_Settings";
+            this.btn_Settings.Size = new System.Drawing.Size(33, 33);
+            this.btn_Settings.TabIndex = 16;
+            this.btn_Settings.UseVisualStyleBackColor = true;
+            this.btn_Settings.Click += new System.EventHandler(this.btn_Settings_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dateiToolStripMenuItem,
+            this.hilfeToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(495, 24);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // dateiToolStripMenuItem
+            // 
+            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.einstellungenToolStripMenuItem,
+            this.beendenAltF4ToolStripMenuItem,
+            this.beendenAltF4ToolStripMenuItem1});
+            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.dateiToolStripMenuItem.Text = "Datei";
+            // 
+            // einstellungenToolStripMenuItem
+            // 
+            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.einstellungenToolStripMenuItem.Text = "Einstellungen";
+            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
+            // 
+            // beendenAltF4ToolStripMenuItem
+            // 
+            this.beendenAltF4ToolStripMenuItem.Name = "beendenAltF4ToolStripMenuItem";
+            this.beendenAltF4ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.beendenAltF4ToolStripMenuItem.Text = "Updates suchen";
+            this.beendenAltF4ToolStripMenuItem.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem_Click);
+            // 
+            // beendenAltF4ToolStripMenuItem1
+            // 
+            this.beendenAltF4ToolStripMenuItem1.Name = "beendenAltF4ToolStripMenuItem1";
+            this.beendenAltF4ToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.beendenAltF4ToolStripMenuItem1.Text = "Beenden Alt+F4";
+            this.beendenAltF4ToolStripMenuItem1.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem1_Click);
+            // 
+            // hilfeToolStripMenuItem
+            // 
+            this.hilfeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fehlerMeldenToolStripMenuItem});
+            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.hilfeToolStripMenuItem.Text = "Hilfe";
+            // 
+            // fehlerMeldenToolStripMenuItem
+            // 
+            this.fehlerMeldenToolStripMenuItem.Name = "fehlerMeldenToolStripMenuItem";
+            this.fehlerMeldenToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.fehlerMeldenToolStripMenuItem.Text = "Fehler melden";
+            this.fehlerMeldenToolStripMenuItem.Click += new System.EventHandler(this.fehlerMeldenToolStripMenuItem_Click);
+            // 
             // MainTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 262);
+            this.ClientSize = new System.Drawing.Size(495, 282);
+            this.Controls.Add(this.btn_Settings);
             this.Controls.Add(this.lbl_prozentanzeige);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btn_Start);
@@ -218,24 +296,26 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtp_Vom);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainTool";
             this.ShowIcon = false;
             this.Text = "Photo Sorter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainTool_FormClosing);
+            this.Load += new System.EventHandler(this.MainTool_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DateTimePicker dtp_Vom;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtp_Bis;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TextBox txt_Quelle;
@@ -250,6 +330,16 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lbl_prozentanzeige;
+        private System.Windows.Forms.Button btn_Settings;
+        internal System.Windows.Forms.DateTimePicker dtp_Vom;
+        internal System.Windows.Forms.DateTimePicker dtp_Bis;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beendenAltF4ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beendenAltF4ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fehlerMeldenToolStripMenuItem;
     }
 }
 
