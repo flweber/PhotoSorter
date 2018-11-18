@@ -16,6 +16,10 @@ namespace PhotoSorter
     public partial class MainTool : Form
     {
         private Settings frmSettings;
+        private string updateError;
+        private string runningProcessWarning;
+        private string processError;
+        private string processfinished;
 
         public MainTool()
         {
@@ -149,7 +153,7 @@ namespace PhotoSorter
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Leider konnte der Prozess nicht ausgeführt werden." + Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(processError + Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -160,7 +164,11 @@ namespace PhotoSorter
             Kontrolle();
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => Kontrolle();
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show(processfinished, "Fertig", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Kontrolle();
+        }
 
         private void btn_Start_Click(object sender, EventArgs e)
         {
@@ -173,7 +181,7 @@ namespace PhotoSorter
         {
             if (backgroundWorker1.IsBusy)
             {
-                DialogResult dialog = MessageBox.Show("Der Prozess wird noch ausgeführt." + Environment.NewLine + "Wollen Sie den Prozess wirklich abbrechen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dialog = MessageBox.Show(runningProcessWarning, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialog == DialogResult.No)
                     e.Cancel = true;
             }
@@ -183,8 +191,7 @@ namespace PhotoSorter
         {
             frmSettings.StartPosition = FormStartPosition.Manual;
             frmSettings.Location = this.Location;
-            this.Enabled = false;
-            frmSettings.Show();
+            frmSettings.ShowDialog();
         }
 
         private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -224,21 +231,72 @@ namespace PhotoSorter
                 string remoteVersion = wnode.InnerText;
                 if (!localVersion.Equals(remoteVersion))
                 {
-                    Program.UpdateViewer = new UpdateWindow(Web, this);
+                    Program.UpdateViewer = new UpdateWindow(Web);
                     Program.UpdateViewer.StartPosition = FormStartPosition.Manual;
                     Program.UpdateViewer.Location = this.Location;
-                    Program.UpdateViewer.Show();
+                    Program.UpdateViewer.ShowDialog();
                     Program.UpdateViewer.Activate();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Leider konnte nicht auf Updates geprüft werden." +
-                    Environment.NewLine + ex.Message + Environment.NewLine + "Bitte gehen Sie über \"Hilfe --> Fehler melden\" um uns zu informieren.", "Updater Error",
+                MessageBox.Show(updateError + Environment.NewLine + ex.Message, "Updater Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void MainTool_Load(object sender, EventArgs e) => CheckForUpdate();
+        private void MainTool_Load(object sender, EventArgs e)
+        {
+            CheckForUpdate();
+            SetLanguage();
+        }
+
+        internal void SetLanguage()
+        {
+            if ((Program.ci.TwoLetterISOLanguageName.Equals("de") || frmSettings.rb_German.Checked) && !frmSettings.rb_English.Checked)
+            {
+                label1.Text = "Vom";
+                label2.Text = "bis";
+                label3.Text = "Urlaubsbilder Sortierer";
+                label4.Text = "Quellordner:";
+                label5.Text = "Zielornder:";
+                label6.Text = "Urlaubsziel:";
+                btn_QuellWahl.Text = "Auswählen";
+                btn_Zielwahl.Text = "Auswählen";
+                dateiToolStripMenuItem.Text = "Datei";
+                einstellungenToolStripMenuItem.Text = "Einstellungen";
+                beendenAltF4ToolStripMenuItem.Text = "Updates suchen";
+                beendenAltF4ToolStripMenuItem1.Text = "Beenden \t Alt+F4";
+                hilfeToolStripMenuItem.Text = "Hilfe";
+                fehlerMeldenToolStripMenuItem.Text = "Fehler melden";
+                updateError = "Leider konnte nicht auf Updates geprüft werden." +
+                    Environment.NewLine + "Bitte gehen Sie über \"Hilfe --> Fehler melden\" um uns zu informieren.";
+                processError = "Leider konnte der Prozess nicht ausgeführt werden.";
+                runningProcessWarning = "Der Prozess wird noch ausgeführt." + Environment.NewLine + "Wollen Sie den Prozess wirklich abbrechen?";
+                processfinished = "Der Prozess wurde ausgeführt";
+                }
+            else
+            {
+                label1.Text = "From";
+                label2.Text = "to";
+                label3.Text = "Photo Sorter";
+                label4.Text = "Source:";
+                label5.Text = "Destination:";
+                label6.Text = "Foldername:";
+                btn_QuellWahl.Text = "Select";
+                btn_Zielwahl.Text = "Select";
+                dateiToolStripMenuItem.Text = "File";
+                einstellungenToolStripMenuItem.Text = "Settings";
+                beendenAltF4ToolStripMenuItem.Text = "Search for Updates";
+                beendenAltF4ToolStripMenuItem1.Text = "Quit \t Alt+F4";
+                hilfeToolStripMenuItem.Text = "Help";
+                fehlerMeldenToolStripMenuItem.Text = "Report Issue";
+                updateError = "Unfortunately we could not check for updates." +
+                    Environment.NewLine + "Please click \"Help --> Report Issue\" to inform us.";
+                processError = "Unfortunately the process could'nt run";
+                runningProcessWarning = "The programme is working." + Environment.NewLine + "Do you really want to cancel the running process?";
+                processfinished = "The process has finished";
+            }
+        }
     }
 }

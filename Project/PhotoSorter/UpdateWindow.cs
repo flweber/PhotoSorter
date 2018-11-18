@@ -17,17 +17,14 @@ namespace PhotoSorter
     {
         private XmlDocument LocalInformation;
         private XmlDocument RemoteVersion;
-        private Form Parent;
 
-        public UpdateWindow(XmlDocument Remote, Form Caller)
+        public UpdateWindow(XmlDocument Remote)
         {
             try
             {
                 RemoteVersion = Remote;
                 LocalInformation = new XmlDocument();
                 LocalInformation.Load(Path.Combine(Application.StartupPath, "version.xml"));
-                Parent = Caller;
-                Parent.Enabled = false;
             }
             catch
             {
@@ -64,14 +61,34 @@ namespace PhotoSorter
             node = root.SelectSingleNode("version");
             txt_New.Text = node.InnerText;
             node = root.SelectSingleNode("updateDate");
-            txt_Information.Text = "Veröffentlichungsdatum: " + node.InnerText + " | " + Environment.NewLine;
+            txt_Information.Text = (Program.ci.TwoLetterISOLanguageName.Equals("de")) ? "Veröffentlichungsdatum: " : "Published at: " + node.InnerText + " | " + Environment.NewLine;
             node = root.SelectSingleNode("description");
             txt_Information.Text += node.InnerText;
+            SetLanguage();
         }
 
-        private void UpdateWindow_FormClosing(object sender, FormClosingEventArgs e)
+        private void SetLanguage()
         {
-            Parent.Enabled = true;
+            switch (Program.ci.TwoLetterISOLanguageName)
+            {
+                case "de":
+                    Text = "Update verfügbar";
+                    label1.Text = "Es ist ein Update verfügbar";
+                    label2.Text = "Installierte Version:";
+                    label3.Text = "Aktuelle Version:";
+                    label4.Text = "Versionsinformation:";
+                    btn_Later.Text = "Später";
+                    break;
+                case "en":
+                default:
+                    Text = "Update available";
+                    label1.Text = "Softwareupdate available";
+                    label2.Text = "Installed Version:";
+                    label3.Text = "Current Version:";
+                    label4.Text = "Update information:";
+                    btn_Later.Text = "Wait";
+                    break;
+            }
         }
     }
 }

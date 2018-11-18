@@ -118,7 +118,7 @@
             // 
             // btn_QuellWahl
             // 
-            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 94);
+            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 97);
             this.btn_QuellWahl.Name = "btn_QuellWahl";
             this.btn_QuellWahl.Size = new System.Drawing.Size(75, 20);
             this.btn_QuellWahl.TabIndex = 7;
