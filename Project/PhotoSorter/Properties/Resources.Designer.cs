@@ -63,6 +63,66 @@ namespace PhotoSorter.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_Gnome_Application_Exit_64_55530 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_Gnome-Application-Exit-64_55530", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_Go_132114 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_Go_132114", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_ic_report_48px_3669260 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_ic_report_48px_3669260", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_opened_folder_172515 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_opened_folder_172515", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_theme_options_tools_feature_3256561 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_theme-options-tools-feature_3256561", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_Update_984748 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_Update_984748", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap if_back_left_arrow_botton_2203523 {
             get {
                 object obj = ResourceManager.GetObject("if_back-left-arrow-botton_2203523", resourceCulture);

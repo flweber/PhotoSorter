@@ -31,7 +31,7 @@ namespace PhotoSorter
                 doc.Load("version.xml");
                 root = doc.DocumentElement;
                 node = root.SelectSingleNode("version");
-                Text += " - " + node.InnerText;
+                toolStripStatusLabel3.Text += node.InnerText;
             }
             catch
             {
@@ -62,7 +62,7 @@ namespace PhotoSorter
             btn_Zielwahl.Enabled = !backgroundWorker1.IsBusy;
             txt_Urlaubsziel.Enabled = !backgroundWorker1.IsBusy;
 
-            if(frmSettings.rb_DateRange.Checked)
+            if (frmSettings.rb_DateRange.Checked)
             {
                 dtp_Vom.Enabled = !backgroundWorker1.IsBusy;
                 dtp_Bis.Enabled = !backgroundWorker1.IsBusy;
@@ -95,7 +95,7 @@ namespace PhotoSorter
         {
             int n = 1;
             string check_folder = txt_Urlaubsziel.Text;
-           
+
             while (Directory.Exists(@txt_Ziel.Text + "\\" + check_folder))
                 check_folder = txt_Urlaubsziel.Text + "-" + n++;
 
@@ -106,21 +106,21 @@ namespace PhotoSorter
                 Directory.CreateDirectory(Zielpfad);
                 List<string> files = Directory.GetFiles(txt_Quelle.Text).ToList();
                 int counter = 1;
-                foreach(string file in files)
+                foreach (string file in files)
                 {
-                    if(file.ToLower().EndsWith(".png") || file.ToLower().EndsWith(".jpg") 
-                        || file.ToLower().EndsWith(".jpeg") || file.ToLower().EndsWith(".tif") 
-                        || file.ToLower().EndsWith(".bmp") || file.ToLower().EndsWith(".gif") 
+                    if (file.ToLower().EndsWith(".png") || file.ToLower().EndsWith(".jpg")
+                        || file.ToLower().EndsWith(".jpeg") || file.ToLower().EndsWith(".tif")
+                        || file.ToLower().EndsWith(".bmp") || file.ToLower().EndsWith(".gif")
                         || file.ToLower().EndsWith(".raw"))
                     {
                         FileInfo fileInfo = new FileInfo(file);
-                        if((frmSettings.rb_CreationDate.Checked && fileInfo.CreationTime.Date >= dtp_Vom.Value.Date && fileInfo.CreationTime.Date <= dtp_Bis.Value.Date)
-                            || (frmSettings.rb_ModifiedatDate.Checked && fileInfo.LastWriteTime.Date >= dtp_Vom.Value.Date && fileInfo.LastWriteTime.Date <= dtp_Bis.Value.Date) 
+                        if ((frmSettings.rb_CreationDate.Checked && fileInfo.CreationTime.Date >= dtp_Vom.Value.Date && fileInfo.CreationTime.Date <= dtp_Bis.Value.Date)
+                            || (frmSettings.rb_ModifiedatDate.Checked && fileInfo.LastWriteTime.Date >= dtp_Vom.Value.Date && fileInfo.LastWriteTime.Date <= dtp_Bis.Value.Date)
                             || frmSettings.rb_AllImages.Checked)
                         {
                             if (frmSettings.rb_CreationDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy")))
                                 Directory.CreateDirectory(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy"));
-                            else if(frmSettings.rb_ModifiedatDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.LastWriteTime.ToString("dd-MM-yyyy")))
+                            else if (frmSettings.rb_ModifiedatDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.LastWriteTime.ToString("dd-MM-yyyy")))
                                 Directory.CreateDirectory(Zielpfad + "\\" + fileInfo.LastWriteTime.ToString("dd-MM-yyyy"));
 
                             n = 1;
@@ -151,7 +151,7 @@ namespace PhotoSorter
                     counter++;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(processError + Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -196,7 +196,7 @@ namespace PhotoSorter
 
         private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/flweber/PhotoSorter/issues/new");
+            Process.Start("https://github.com/flweber/PhotoSorter/issues/new?labels=bug");
         }
 
         private void beendenAltF4ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -212,9 +212,9 @@ namespace PhotoSorter
             frmSettings.Show();
         }
 
-        private void beendenAltF4ToolStripMenuItem_Click(object sender, EventArgs e) => CheckForUpdate();
+        private void beendenAltF4ToolStripMenuItem_Click(object sender, EventArgs e) => CheckForUpdate(true);
 
-        private void CheckForUpdate()
+        private void CheckForUpdate(bool manualExecution = false)
         {
             try
             {
@@ -229,7 +229,7 @@ namespace PhotoSorter
                 wnode = wroot.SelectSingleNode("version");
                 string localVersion = lnode.InnerText;
                 string remoteVersion = wnode.InnerText;
-                if (!localVersion.Equals(remoteVersion))
+                if (!localVersion.Equals(remoteVersion) || manualExecution)
                 {
                     Program.UpdateViewer = new UpdateWindow(Web);
                     Program.UpdateViewer.StartPosition = FormStartPosition.Manual;
@@ -249,6 +249,9 @@ namespace PhotoSorter
         {
             CheckForUpdate();
             SetLanguage();
+            btn_QuellWahl.Image = (Image)(new Bitmap(Properties.Resources.iconfinder_opened_folder_172515, new Size(32, 32)));
+            btn_Zielwahl.Image = (Image)(new Bitmap(Properties.Resources.iconfinder_opened_folder_172515, new Size(32, 32)));
+            btn_Start.Image = (Image)(new Bitmap(Properties.Resources.iconfinder_Go_132114, new Size(16, 16)));
         }
 
         internal void SetLanguage()
@@ -264,17 +267,20 @@ namespace PhotoSorter
                 btn_QuellWahl.Text = "Auswählen";
                 btn_Zielwahl.Text = "Auswählen";
                 dateiToolStripMenuItem.Text = "Datei";
-                einstellungenToolStripMenuItem.Text = "Einstellungen";
-                beendenAltF4ToolStripMenuItem.Text = "Updates suchen";
-                beendenAltF4ToolStripMenuItem1.Text = "Beenden \t Alt+F4";
+                einstellungenToolStripMenuItem.Text = "Einstellungen          Strg+E";
+                beendenAltF4ToolStripMenuItem.Text = "Updates suchen      F5";
+                beendenAltF4ToolStripMenuItem1.Text = "Beenden                  Alt+F4";
                 hilfeToolStripMenuItem.Text = "Hilfe";
-                fehlerMeldenToolStripMenuItem.Text = "Fehler melden";
+                fehlerMeldenToolStripMenuItem.Text = "Fehler melden       Alt+E";
                 updateError = "Leider konnte nicht auf Updates geprüft werden." +
                     Environment.NewLine + "Bitte gehen Sie über \"Hilfe --> Fehler melden\" um uns zu informieren.";
                 processError = "Leider konnte der Prozess nicht ausgeführt werden.";
                 runningProcessWarning = "Der Prozess wird noch ausgeführt." + Environment.NewLine + "Wollen Sie den Prozess wirklich abbrechen?";
                 processfinished = "Der Prozess wurde ausgeführt";
-                }
+                toolStripStatusLabel1.Text = "Hallo ";
+                toolStripStatusLabel1.Text += (System.Security.Principal.WindowsIdentity.GetCurrent().Name.Contains("\\")) ? System.Security.Principal.WindowsIdentity.GetCurrent().Name.Split('\\')[1] : System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                vorschlagBereitstellenToolStripMenuItem.Text = "Vorschlag bereitstellen";
+            }
             else
             {
                 label1.Text = "From";
@@ -286,17 +292,53 @@ namespace PhotoSorter
                 btn_QuellWahl.Text = "Select";
                 btn_Zielwahl.Text = "Select";
                 dateiToolStripMenuItem.Text = "File";
-                einstellungenToolStripMenuItem.Text = "Settings";
-                beendenAltF4ToolStripMenuItem.Text = "Search for Updates";
-                beendenAltF4ToolStripMenuItem1.Text = "Quit \t Alt+F4";
+                einstellungenToolStripMenuItem.Text = "Settings                         Strg+E";
+                beendenAltF4ToolStripMenuItem.Text = "Search for Updates      F5";
+                beendenAltF4ToolStripMenuItem1.Text = "Quit                                Alt+F4";
                 hilfeToolStripMenuItem.Text = "Help";
-                fehlerMeldenToolStripMenuItem.Text = "Report Issue";
+                fehlerMeldenToolStripMenuItem.Text = "Report Issue       Alt+E";
                 updateError = "Unfortunately we could not check for updates." +
                     Environment.NewLine + "Please click \"Help --> Report Issue\" to inform us.";
-                processError = "Unfortunately the process could'nt run";
+                processError = "Unfortunately the process couldn't run";
                 runningProcessWarning = "The programme is working." + Environment.NewLine + "Do you really want to cancel the running process?";
                 processfinished = "The process has finished";
+                toolStripStatusLabel1.Text = "Hello ";
+                toolStripStatusLabel1.Text += (System.Security.Principal.WindowsIdentity.GetCurrent().Name.Contains("\\")) ? System.Security.Principal.WindowsIdentity.GetCurrent().Name.Split('\\')[1] : System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                vorschlagBereitstellenToolStripMenuItem.Text = "Request enhancement";
             }
+        }
+
+        private void MainTool_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F5:
+                    CheckForUpdate(true);
+                    break;
+                default:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        if (e.KeyCode == Keys.Q)
+                            btn_QuellWahl_Click(btn_QuellWahl, new EventArgs());
+                        else if (e.KeyCode == Keys.Z)
+                            btn_Zielwahl_Click(btn_Zielwahl, new EventArgs());
+                        else if (e.KeyCode == Keys.S)
+                            btn_Start_Click(btn_Start, new EventArgs());
+                        else if (e.KeyCode == Keys.E)
+                            btn_Settings_Click(btn_Settings, new EventArgs());
+                    }
+                    else if (e.Modifiers == Keys.Alt)
+                    {
+                        if (e.KeyCode == Keys.E)
+                            fehlerMeldenToolStripMenuItem_Click(fehlerMeldenToolStripMenuItem, new EventArgs());
+                    }
+                    break;
+            }
+        }
+
+        private void vorschlagBereitstellenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/flweber/PhotoSorter/issues/new?labels=enhancement");
         }
     }
 }
