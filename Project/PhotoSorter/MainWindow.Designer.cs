@@ -53,13 +53,13 @@
             this.beendenAltF4ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fehlerMeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vorschlagBereitstellenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.btn_QuellWahl = new System.Windows.Forms.Button();
             this.btn_Settings = new System.Windows.Forms.Button();
             this.btn_Start = new System.Windows.Forms.Button();
-            this.vorschlagBereitstellenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -108,19 +108,25 @@
             // 
             // txt_Quelle
             // 
+            this.txt_Quelle.AllowDrop = true;
             this.txt_Quelle.Location = new System.Drawing.Point(77, 98);
             this.txt_Quelle.Name = "txt_Quelle";
             this.txt_Quelle.ReadOnly = true;
             this.txt_Quelle.Size = new System.Drawing.Size(174, 20);
             this.txt_Quelle.TabIndex = 5;
+            this.txt_Quelle.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_DragDrop);
+            this.txt_Quelle.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_DragEnter);
             // 
             // txt_Ziel
             // 
+            this.txt_Ziel.AllowDrop = true;
             this.txt_Ziel.Location = new System.Drawing.Point(77, 144);
             this.txt_Ziel.Name = "txt_Ziel";
             this.txt_Ziel.ReadOnly = true;
             this.txt_Ziel.Size = new System.Drawing.Size(174, 20);
             this.txt_Ziel.TabIndex = 6;
+            this.txt_Ziel.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_DragDrop);
+            this.txt_Ziel.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_DragEnter);
             // 
             // btn_Zielwahl
             // 
@@ -261,6 +267,14 @@
             this.fehlerMeldenToolStripMenuItem.Text = "Fehler melden";
             this.fehlerMeldenToolStripMenuItem.Click += new System.EventHandler(this.fehlerMeldenToolStripMenuItem_Click);
             // 
+            // vorschlagBereitstellenToolStripMenuItem
+            // 
+            this.vorschlagBereitstellenToolStripMenuItem.Image = global::PhotoSorter.Properties.Resources.iconfinder_theme_options_tools_feature_3256561;
+            this.vorschlagBereitstellenToolStripMenuItem.Name = "vorschlagBereitstellenToolStripMenuItem";
+            this.vorschlagBereitstellenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.vorschlagBereitstellenToolStripMenuItem.Text = "Vorschlag bereitstellen";
+            this.vorschlagBereitstellenToolStripMenuItem.Click += new System.EventHandler(this.vorschlagBereitstellenToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -323,16 +337,9 @@
             this.btn_Start.UseVisualStyleBackColor = true;
             this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
             // 
-            // vorschlagBereitstellenToolStripMenuItem
-            // 
-            this.vorschlagBereitstellenToolStripMenuItem.Image = global::PhotoSorter.Properties.Resources.iconfinder_theme_options_tools_feature_3256561;
-            this.vorschlagBereitstellenToolStripMenuItem.Name = "vorschlagBereitstellenToolStripMenuItem";
-            this.vorschlagBereitstellenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.vorschlagBereitstellenToolStripMenuItem.Text = "Vorschlag bereitstellen";
-            this.vorschlagBereitstellenToolStripMenuItem.Click += new System.EventHandler(this.vorschlagBereitstellenToolStripMenuItem_Click);
-            // 
             // MainTool
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(489, 300);

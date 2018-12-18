@@ -15,15 +15,45 @@ namespace PhotoSorter
 {
     public partial class MainTool : Form
     {
+
+        // Deklaration der Instanzvariablen
+        
+        /// <summary>
+        /// Beinhaltet das Einstellungsfenster
+        /// </summary>
         private Settings frmSettings;
+
+        /// <summary>
+        /// Wird angezeigt, wenn ein Error beim updaten der Software auftritt.
+        /// Enthält immer die eingestellte Sprachversion
+        /// </summary>
         private string updateError;
+
+        /// <summary>
+        /// Meldung beim Schließen der Anwendung, wenn der Sortierprozess noch nicht
+        /// abgeschlossen ist.
+        /// Enthält immer die eingestellte Sprachversion
+        /// </summary>
         private string runningProcessWarning;
+
+        /// <summary>
+        /// Meldung wenn es einen Fehler beim Sortierprozess gab.
+        /// Enthält immer die eingestellte Sprachversion
+        /// </summary>
         private string processError;
+
+        /// <summary>
+        /// Meldung um den Benutzer zu informieren, dass der Sortiervorgang
+        /// abgeschlossen wurde
+        /// Enthält immer die eingestellte Sprachversion
+        /// </summary>
         private string processfinished;
 
         public MainTool()
         {
             InitializeComponent();
+
+            // Anzeigen der Versionsnummer im Status Label
             try
             {
                 XmlDocument doc = new XmlDocument();
@@ -37,17 +67,25 @@ namespace PhotoSorter
             {
                 // Wenn es einen Fehler gibt wird die Version eben nicht angezeigt
             }
+
+            // Designanpassungen des Settings-Buttons um den Hintergrund zu entfernen
             btn_Settings.TabStop = false;
             btn_Settings.FlatStyle = FlatStyle.Flat;
             btn_Settings.FlatAppearance.BorderSize = 0;
+
+            // Initialisierung des Settings Fensters
             frmSettings = new Settings(this);
         }
 
         /// <summary>
         /// Aktiviert bzw. deaktiviert den Startbutton
+        /// und Prozesskritische Eingabeelemente.
+        /// Passt außerdem die Anzeige an die vom User
+        /// vorgenommenen Einstellungen an.
         /// </summary>
         private void Kontrolle()
         {
+            // Deaktiviert bzw. aktiviert den Start-Button wenn alle benötigten Felder ausgefüllt wurden
             if (String.IsNullOrWhiteSpace(txt_Quelle.Text) || String.IsNullOrWhiteSpace(txt_Ziel.Text) || String.IsNullOrWhiteSpace(txt_Urlaubsziel.Text) || backgroundWorker1.IsBusy)
             {
                 btn_Start.Enabled = false;
@@ -58,10 +96,14 @@ namespace PhotoSorter
                 btn_Start.Enabled = true;
             }
 
+            // Aktiviert bzw. deaktiviert Einstellungen, die den Sortierprozess beeinflussen, je nachdem
+            // ob der Vorgang am laufen ist oder nicht.
             btn_QuellWahl.Enabled = !backgroundWorker1.IsBusy;
             btn_Zielwahl.Enabled = !backgroundWorker1.IsBusy;
             txt_Urlaubsziel.Enabled = !backgroundWorker1.IsBusy;
 
+            // Aktiviert bzw. deaktiviert die Eingabe des Datumsbereiches, je nachdem
+            // wie es in den Einstellungen vom Benutzer festgelegt wurde 
             if (frmSettings.rb_DateRange.Checked)
             {
                 dtp_Vom.Enabled = !backgroundWorker1.IsBusy;
@@ -69,6 +111,10 @@ namespace PhotoSorter
             }
         }
 
+        /// <summary>
+        /// Öffnet einen Folderbrwose Dialog und lässt
+        /// den User die Bilderquelle wählen
+        /// </summary>
         private void btn_QuellWahl_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = folderBrowserDialog1.ShowDialog();
@@ -79,6 +125,10 @@ namespace PhotoSorter
             Kontrolle();
         }
 
+        /// <summary>
+        /// Öffnet einen Folderbrwose Dialog und lässt
+        /// den User den Zielpfad wählen
+        /// </summary>
         private void btn_Zielwahl_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = folderBrowserDialog1.ShowDialog();
@@ -89,10 +139,18 @@ namespace PhotoSorter
             Kontrolle();
         }
 
+        /// <summary>
+        /// Überprüfung der Prozesskritischen Elemente, wenn sich der Zielordner Text ändert
+        /// </summary>
         private void txt_Urlaubsziel_TextChanged(object sender, EventArgs e) => Kontrolle();
 
+        /// <summary>
+        /// Hier befindet sich der Sortierprozess
+        /// </summary>
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            // Sicherheit um dafür zu sorgen, dass der Ordner nicht überschrieben wird,
+            // falls dieser bereits existiert
             int n = 1;
             string check_folder = txt_Urlaubsziel.Text;
 
@@ -103,27 +161,37 @@ namespace PhotoSorter
 
             try
             {
+                // Ordner erstellen und alle Elemente aus dem Quellordner einlesen
                 Directory.CreateDirectory(Zielpfad);
                 List<string> files = Directory.GetFiles(txt_Quelle.Text).ToList();
+
+                // Counter für die Prozentanzeige
                 int counter = 1;
+
+                // Dateien durchlaufen
                 foreach (string file in files)
                 {
+                    // Nur wenn es ein Bild ist
                     if (file.ToLower().EndsWith(".png") || file.ToLower().EndsWith(".jpg")
                         || file.ToLower().EndsWith(".jpeg") || file.ToLower().EndsWith(".tif")
                         || file.ToLower().EndsWith(".bmp") || file.ToLower().EndsWith(".gif")
                         || file.ToLower().EndsWith(".raw"))
                     {
+                        // Bildinformationen lesen
                         FileInfo fileInfo = new FileInfo(file);
+
+                        // Nur wenn es im Datumsbereich liegt oder alle Bilder kopiert werden sollen
                         if ((frmSettings.rb_CreationDate.Checked && fileInfo.CreationTime.Date >= dtp_Vom.Value.Date && fileInfo.CreationTime.Date <= dtp_Bis.Value.Date)
                             || (frmSettings.rb_ModifiedatDate.Checked && fileInfo.LastWriteTime.Date >= dtp_Vom.Value.Date && fileInfo.LastWriteTime.Date <= dtp_Bis.Value.Date)
                             || frmSettings.rb_AllImages.Checked)
                         {
+                            // Falls noch kein Ordner zu dem Datum des Bildes existiert, soll dieser erstellt werden
                             if (frmSettings.rb_CreationDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy")))
                                 Directory.CreateDirectory(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy"));
                             else if (frmSettings.rb_ModifiedatDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.LastWriteTime.ToString("dd-MM-yyyy")))
                                 Directory.CreateDirectory(Zielpfad + "\\" + fileInfo.LastWriteTime.ToString("dd-MM-yyyy"));
-
-                            n = 1;
+                            
+                            // Erstellen des kompletten Zielpfades für das Bild
                             string fullfilepath = Zielpfad + "\\";
 
                             if (frmSettings.rb_CreationDate.Checked)
@@ -133,6 +201,8 @@ namespace PhotoSorter
 
                             fullfilepath += "\\" + fileInfo.Name;
 
+                            // Falls das Bild bereits existiert, soll der Name mit einer Nummer ergänzt werden
+                            n = 1;
                             while (File.Exists(fullfilepath))
                             {
                                 string Filename = fileInfo.Name.Split('.')[0] + "-" + n + "." + fileInfo.Extension;
@@ -140,12 +210,15 @@ namespace PhotoSorter
                                 n++;
                             }
 
+                            // Bild kopieren oder verschieben, wird anhand der Usereinstellungen gewählt
                             if (frmSettings.rb_Copy.Checked)
                                 File.Copy(file, fullfilepath);
                             else if (frmSettings.rb_Cut.Checked)
                                 File.Move(file, fullfilepath);
                         }
                     }
+
+                    // Fortschritt berechnen und in der Progressbar anzeigen
                     double percent = ((double)counter / (double)files.Count) * (double)100;
                     backgroundWorker1.ReportProgress((int)percent);
                     counter++;
@@ -157,6 +230,9 @@ namespace PhotoSorter
             }
         }
 
+        /// <summary>
+        /// Progress Reporting for the User
+        /// </summary>
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
@@ -164,12 +240,18 @@ namespace PhotoSorter
             Kontrolle();
         }
 
+        /// <summary>
+        /// User über den Abschluss des Sortierprozesses informieren
+        /// </summary>
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             MessageBox.Show(processfinished, "Fertig", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Kontrolle();
         }
 
+        /// <summary>
+        /// Startet den Sortiervorgang auf Befehl des Users
+        /// </summary>
         private void btn_Start_Click(object sender, EventArgs e)
         {
             lbl_prozentanzeige.Visible = true;
@@ -177,6 +259,9 @@ namespace PhotoSorter
             Kontrolle();
         }
 
+        /// <summary>
+        /// ggf. das Schließen verhindern, der Prozess gerade am laufen ist
+        /// </summary>
         private void MainTool_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (backgroundWorker1.IsBusy)
@@ -187,6 +272,11 @@ namespace PhotoSorter
             }
         }
 
+        /// <summary>
+        /// Öffnet die Einstellungen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Settings_Click(object sender, EventArgs e)
         {
             frmSettings.StartPosition = FormStartPosition.Manual;
@@ -194,16 +284,29 @@ namespace PhotoSorter
             frmSettings.ShowDialog();
         }
 
+        /// <summary>
+        /// Öffnet einen neuen Bug auf GitHub
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/flweber/PhotoSorter/issues/new?labels=bug");
         }
 
+        /// <summary>
+        /// Beendet die Anwendung
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void beendenAltF4ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Öffnet die Einstellungen
+        /// </summary>
         private void einstellungenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmSettings.StartPosition = FormStartPosition.Manual;
@@ -212,8 +315,17 @@ namespace PhotoSorter
             frmSettings.Show();
         }
 
+        /// <summary>
+        /// Startet die Überprüfung auf Updates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void beendenAltF4ToolStripMenuItem_Click(object sender, EventArgs e) => CheckForUpdate(true);
 
+        /// <summary>
+        /// Überprüft, ob es ein Update für die Anwendung gibt
+        /// </summary>
+        /// <param name="manualExecution">Gibt an ob die Prüfung durch den User gestartet wurde</param>
         private void CheckForUpdate(bool manualExecution = false)
         {
             try
@@ -245,6 +357,10 @@ namespace PhotoSorter
             }
         }
 
+        /// <summary>
+        /// Setzt beim Start die Bilder für die Buttons
+        /// und startet die Überprüfung auf Updates
+        /// </summary>
         private void MainTool_Load(object sender, EventArgs e)
         {
             CheckForUpdate();
@@ -254,6 +370,10 @@ namespace PhotoSorter
             btn_Start.Image = (Image)(new Bitmap(Properties.Resources.iconfinder_Go_132114, new Size(16, 16)));
         }
 
+        /// <summary>
+        /// Setzt die Sprache für alle Elemente der Eingabemaske und der Meldungen
+        /// beim Start auf die Systemsprache oder nach den Einstellungen
+        /// </summary>
         internal void SetLanguage()
         {
             if ((Program.ci.TwoLetterISOLanguageName.Equals("de") || frmSettings.rb_German.Checked) && !frmSettings.rb_English.Checked)
@@ -308,6 +428,9 @@ namespace PhotoSorter
             }
         }
 
+        /// <summary>
+        /// Shortcuts
+        /// </summary>
         private void MainTool_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -322,7 +445,7 @@ namespace PhotoSorter
                             btn_QuellWahl_Click(btn_QuellWahl, new EventArgs());
                         else if (e.KeyCode == Keys.Z)
                             btn_Zielwahl_Click(btn_Zielwahl, new EventArgs());
-                        else if (e.KeyCode == Keys.S)
+                        else if (e.KeyCode == Keys.S && btn_Start.Enabled)
                             btn_Start_Click(btn_Start, new EventArgs());
                         else if (e.KeyCode == Keys.E)
                             btn_Settings_Click(btn_Settings, new EventArgs());
@@ -336,9 +459,24 @@ namespace PhotoSorter
             }
         }
 
+        /// <summary>
+        /// Öffnet GitHub mit einem Vorschlag
+        /// </summary>
         private void vorschlagBereitstellenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/flweber/PhotoSorter/issues/new?labels=enhancement");
+        }
+
+        private void txt_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, false))
+                e.Effect = DragDropEffects.All;
+        }
+
+        private void txt_DragDrop(object sender, DragEventArgs e)
+        {
+            TextBox txt_Sender = (TextBox)sender;
+            txt_Sender.Text = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
         }
     }
 }
