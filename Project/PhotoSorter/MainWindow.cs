@@ -15,7 +15,6 @@ namespace PhotoSorter
 {
     public partial class MainTool : Form
     {
-
         // Deklaration der Instanzvariablen
         
         /// <summary>
@@ -172,10 +171,11 @@ namespace PhotoSorter
                         backgroundWorker1.ReportProgress((int)percent);
                         counter++;
                     }
-                    catch { }
+                    catch
+                    {
+                        backgroundWorker1.ReportProgress(50);
+                    }
                 }
-                //Sorter.SortPictures(ref counter, frmSettings.rb_CreationDate.Checked, frmSettings.rb_ModifiedatDate.Checked, frmSettings.rb_AllImages.Checked, frmSettings.rb_Copy.Checked, dtp_Vom.Value, dtp_Bis.Value);
-
             }
             catch (Exception ex)
             {

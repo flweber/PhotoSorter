@@ -45,64 +45,86 @@ namespace PhotoSorter
             maxPages = 2;
             try
             {
-                XmlDocument settings = new XmlDocument();
-                if (!File.Exists(Path.Combine(Application.StartupPath, "settings.xml")))
-                {
-                    XmlDeclaration xmlDeclaration = settings.CreateXmlDeclaration("1.0", "UTF-8", null);
-                    string lang = Program.ci.TwoLetterISOLanguageName.Equals("de") ? "de" : "en";
-                    XmlElement root = settings.CreateElement("PhotoSorterSettings");
-                    root.SetAttribute("lang", lang);
-                    XmlElement child = settings.CreateElement("SortMode");
-                    if (rb_Copy.Checked)
-                        child.SetAttribute("Selection", "Copy");
-                    else
-                        child.SetAttribute("Selection", "Cut");
-                    root.AppendChild(child);
-                    child = settings.CreateElement("SortDate");
-                    if (rb_CreationDate.Checked)
-                        child.SetAttribute("Selection", "Creation");
-                    else
-                        child.SetAttribute("Selection", "Modification");
-                    root.AppendChild(child);
-                    child = settings.CreateElement("ImageSelection");
-                    if (rb_DateRange.Checked)
-                        child.SetAttribute("Selection", "DateRange");
-                    else
-                        child.SetAttribute("Selection", "All");
-                    root.AppendChild(child);
-                    settings.AppendChild(root);
-                    settings.InsertBefore(xmlDeclaration, root);
-                    settings.Save(Path.Combine(Application.StartupPath, "settings.xml"));
-                }
-                else
-                {
-                    settings.Load(Path.Combine(Application.StartupPath, "settings.xml"));
-                    XmlElement root = settings.DocumentElement;
-                    if (root.GetAttribute("lang") == "de")
-                        rb_German.Checked = true;
-                    else
-                        rb_English.Checked = true;
-                    XmlNode child = root.SelectSingleNode("SortMode");
-                    if (child.Attributes["Selection"].Value == "Copy")
-                        rb_Copy.Checked = true;
-                    else
-                        rb_Cut.Checked = true;
-                    child = root.SelectSingleNode("SortDate");
-                    if (child.Attributes["Selection"].Value == "Creation")
-                        rb_CreationDate.Checked = true;
-                    else
-                        rb_ModifiedatDate.Checked = true;
-                    child = root.SelectSingleNode("ImageSelection");
-                    if (child.Attributes["Selection"].Value == "DateRange")
-                        rb_DateRange.Checked = true;
-                    else
-                        rb_AllImages.Checked = true;
-                }
+                LoadSettings();
             }
             catch
             {
-                //Erstmal garnichts
+                try
+                {
+                    CreateSettingsFile(Path.Combine(Application.StartupPath, "settings.xml"), new XmlDocument());
+                }
+                catch
+                {
+                    // Wenn das auch nicht klappt, dann erstmal gar nichts
+                }
             }
+        }
+
+        private void LoadSettings()
+        {
+            XmlDocument settings = new XmlDocument();
+            string FilePath = Path.Combine(Application.StartupPath, "settings.xml");
+            if (!File.Exists(FilePath))
+            {
+                CreateSettingsFile(FilePath, settings);
+            }
+            else
+            {
+                settings.Load(FilePath);
+                SetSettingsAutomatic(settings.DocumentElement);
+            }
+        }
+
+        private void SetSettingsAutomatic(XmlElement root)
+        {
+            if (root.GetAttribute("lang") == "de")
+                rb_German.Checked = true;
+            else
+                rb_English.Checked = true;
+            XmlNode child = root.SelectSingleNode("SortMode");
+            if (child.Attributes["Selection"].Value == "Copy")
+                rb_Copy.Checked = true;
+            else
+                rb_Cut.Checked = true;
+            child = root.SelectSingleNode("SortDate");
+            if (child.Attributes["Selection"].Value == "Creation")
+                rb_CreationDate.Checked = true;
+            else
+                rb_ModifiedatDate.Checked = true;
+            child = root.SelectSingleNode("ImageSelection");
+            if (child.Attributes["Selection"].Value == "DateRange")
+                rb_DateRange.Checked = true;
+            else
+                rb_AllImages.Checked = true;
+        }
+
+        private void CreateSettingsFile(string SavePath, XmlDocument settings)
+        {
+            XmlDeclaration xmlDeclaration = settings.CreateXmlDeclaration("1.0", "UTF-8", null);
+            string lang = Program.ci.TwoLetterISOLanguageName.Equals("de") ? "de" : "en";
+            XmlElement root = settings.CreateElement("PhotoSorterSettings");
+            root.SetAttribute("lang", lang);
+            XmlElement child = settings.CreateElement("SortMode");
+            if (rb_Copy.Checked)
+                child.SetAttribute("Selection", "Copy");
+            else
+                child.SetAttribute("Selection", "Cut");
+            root.AppendChild(child);
+            child = settings.CreateElement("SortDate");
+            if (rb_CreationDate.Checked)
+                child.SetAttribute("Selection", "Creation");
+            else
+                child.SetAttribute("Selection", "Modification");
+            root.AppendChild(child);
+            child = settings.CreateElement("ImageSelection");
+            if (rb_DateRange.Checked)
+                child.SetAttribute("Selection", "DateRange");
+            else
+                child.SetAttribute("Selection", "All");
+            root.AppendChild(child);
+            settings.AppendChild(root);
+            settings.InsertBefore(xmlDeclaration, root);
+            settings.Save(Path.Combine(Application.StartupPath, "settings.xml"));
         }
 
         private void btn_SortmodeHelp_Click(object sender, EventArgs e)
