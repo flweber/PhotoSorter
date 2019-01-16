@@ -89,7 +89,6 @@ namespace PhotoSorter
             if (String.IsNullOrWhiteSpace(txt_Quelle.Text) || String.IsNullOrWhiteSpace(txt_Ziel.Text) || String.IsNullOrWhiteSpace(txt_Urlaubsziel.Text) || backgroundWorker1.IsBusy)
             {
                 btn_Start.Enabled = false;
-
             }
             else
             {
@@ -149,80 +148,34 @@ namespace PhotoSorter
         /// </summary>
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            // Sicherheit um dafür zu sorgen, dass der Ordner nicht überschrieben wird,
-            // falls dieser bereits existiert
-            int n = 1;
-            string check_folder = txt_Urlaubsziel.Text;
+            PhotoSorter Sorter = new PhotoSorter(this.txt_Ziel.Text, this.txt_Quelle.Text, this.txt_Urlaubsziel.Text);
 
-            while (Directory.Exists(@txt_Ziel.Text + "\\" + check_folder))
-                check_folder = txt_Urlaubsziel.Text + "-" + n++;
-
-            string Zielpfad = @txt_Ziel.Text + "\\" + check_folder;
+            Sorter.CheckIfDirExists();
 
             try
             {
                 // Ordner erstellen und alle Elemente aus dem Quellordner einlesen
-                Directory.CreateDirectory(Zielpfad);
-                List<string> files = Directory.GetFiles(txt_Quelle.Text).ToList();
+                Sorter.CreateNewDirectory(Sorter.SortFolder);
+
+                Sorter.ReadSourceDir();
 
                 // Counter für die Prozentanzeige
                 int counter = 1;
 
-                // Dateien durchlaufen
-                foreach (string file in files)
+                for(int i = 0; i < Sorter.NumberOfSourceFiles; i++)
                 {
-                    // Nur wenn es ein Bild ist
-                    if (file.ToLower().EndsWith(".png") || file.ToLower().EndsWith(".jpg")
-                        || file.ToLower().EndsWith(".jpeg") || file.ToLower().EndsWith(".tif")
-                        || file.ToLower().EndsWith(".bmp") || file.ToLower().EndsWith(".gif")
-                        || file.ToLower().EndsWith(".raw"))
+                    Sorter.SortPicture(i, frmSettings.rb_CreationDate.Checked, frmSettings.rb_ModifiedatDate.Checked, frmSettings.rb_AllImages.Checked, frmSettings.rb_Copy.Checked, dtp_Vom.Value, dtp_Bis.Value);
+                    try
                     {
-                        // Bildinformationen lesen
-                        FileInfo fileInfo = new FileInfo(file);
-
-                        // Nur wenn es im Datumsbereich liegt oder alle Bilder kopiert werden sollen
-                        if ((frmSettings.rb_CreationDate.Checked && fileInfo.CreationTime.Date >= dtp_Vom.Value.Date && fileInfo.CreationTime.Date <= dtp_Bis.Value.Date)
-                            || (frmSettings.rb_ModifiedatDate.Checked && fileInfo.LastWriteTime.Date >= dtp_Vom.Value.Date && fileInfo.LastWriteTime.Date <= dtp_Bis.Value.Date)
-                            || frmSettings.rb_AllImages.Checked)
-                        {
-                            // Falls noch kein Ordner zu dem Datum des Bildes existiert, soll dieser erstellt werden
-                            if (frmSettings.rb_CreationDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy")))
-                                Directory.CreateDirectory(Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy"));
-                            else if (frmSettings.rb_ModifiedatDate.Checked && !Directory.Exists(Zielpfad + "\\" + fileInfo.LastWriteTime.ToString("dd-MM-yyyy")))
-                                Directory.CreateDirectory(Zielpfad + "\\" + fileInfo.LastWriteTime.ToString("dd-MM-yyyy"));
-                            
-                            // Erstellen des kompletten Zielpfades für das Bild
-                            string fullfilepath = Zielpfad + "\\";
-
-                            if (frmSettings.rb_CreationDate.Checked)
-                                fullfilepath += fileInfo.CreationTime.ToString("dd-MM-yyyy");
-                            else if (frmSettings.rb_ModifiedatDate.Checked)
-                                fullfilepath += fileInfo.LastWriteTime.ToString("dd-MM-yyyy");
-
-                            fullfilepath += "\\" + fileInfo.Name;
-
-                            // Falls das Bild bereits existiert, soll der Name mit einer Nummer ergänzt werden
-                            n = 1;
-                            while (File.Exists(fullfilepath))
-                            {
-                                string Filename = fileInfo.Name.Split('.')[0] + "-" + n + "." + fileInfo.Extension;
-                                fullfilepath = Zielpfad + "\\" + fileInfo.CreationTime.ToString("dd-MM-yyyy") + "\\" + Filename;
-                                n++;
-                            }
-
-                            // Bild kopieren oder verschieben, wird anhand der Usereinstellungen gewählt
-                            if (frmSettings.rb_Copy.Checked)
-                                File.Copy(file, fullfilepath);
-                            else if (frmSettings.rb_Cut.Checked)
-                                File.Move(file, fullfilepath);
-                        }
+                        // Fortschritt berechnen und in der Progressbar anzeigen
+                        double percent = ((double)counter / (double)Sorter.NumberOfSourceFiles) * (double)100;
+                        backgroundWorker1.ReportProgress((int)percent);
+                        counter++;
                     }
-
-                    // Fortschritt berechnen und in der Progressbar anzeigen
-                    double percent = ((double)counter / (double)files.Count) * (double)100;
-                    backgroundWorker1.ReportProgress((int)percent);
-                    counter++;
+                    catch { }
                 }
+                //Sorter.SortPictures(ref counter, frmSettings.rb_CreationDate.Checked, frmSettings.rb_ModifiedatDate.Checked, frmSettings.rb_AllImages.Checked, frmSettings.rb_Copy.Checked, dtp_Vom.Value, dtp_Bis.Value);
+
             }
             catch (Exception ex)
             {
