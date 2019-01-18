@@ -1,0 +1,36 @@
+language: csharp
+solution: Project/PhotoSorter.sln
+
+script:
+  - xbuild /p:Configuration=Release Project/PhotoSorter.sln
+  - mkdir Upload
+  - cp Project/PhotoSorter/version.xml Project/PhotoSorter/bin/Release/version.xml
+  - cd Project/PhotoSorter/bin/Release/
+  - ls
+  - zip -r Release.zip .
+  - cp Release.zip ../../../../Upload/
+  - cd ../../../../
+  - cp Project/PhotoSorter/version.xml Upload/
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: "flweber-github"
+    region: eu-central-1
+    acl: public_read
+    skip_cleanup: true
+    local_dir: Upload
+    upload-dir: PhotoSorter/update
+    on:
+      tags: true
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: "flweber"
+    region: us-west-1
+    acl: public_read
+    skip_cleanup: true
+    local_dir: Upload
+    upload-dir: PhotoSorter/update
+    on:
+      tags: true
