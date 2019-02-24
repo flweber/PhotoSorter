@@ -2,14 +2,14 @@
 <PhotoSorter>
   <version>1.2.4.1</version>
   <description>
-    Da man keine Verzeichnisse von Smartphones auswählen kann haben wir nun die Möglichkeit eingebaut nach dem Änderungsdatum zu Sortieren.
-    Außerdem ist es nun möglich einzustellen, ob man die Quelldateien behalten möchte oder nicht.
-    Zudem haben wir uns dazu entschieden, Sie ab dieser Version nicht mehr zu den Updates zu zwingen, indem nun ein kleines Fenster eingebaut haben,
-    in welchem Sie die Neuerungen sehen können und selbst wählen können, ob Sie diese brauchen oder nicht.
-    Der Benutzer wird ab jetzt über die Updates informiert und kann selbst entscheiden, on er diese durchführen möchte.
-    Es gibt nun auch die Möglichkeit, dass Programm auf Englisch zu bedienen.
-    
-    The biggest change is the English support. Also we added an settings window so that the user is able to decide how the photos will be sorted.
+    Da man keine Verzeichnisse von Smartphones auswählen kann haben wir nun die Möglichkeit eingebaut nach dem Änderungsdatum zu Sortieren.\n
+    Außerdem ist es nun möglich einzustellen, ob man die Quelldateien behalten möchte oder nicht.\n
+    Zudem haben wir uns dazu entschieden, Sie ab dieser Version nicht mehr zu den Updates zu zwingen, indem nun ein kleines Fenster eingebaut haben,\n
+    in welchem Sie die Neuerungen sehen können und selbst wählen können, ob Sie diese brauchen oder nicht.\n
+    Der Benutzer wird ab jetzt über die Updates informiert und kann selbst entscheiden, on er diese durchführen möchte.\n
+    Es gibt nun auch die Möglichkeit, dass Programm auf Englisch zu bedienen.\n
+    \n
+    The biggest change is the English support. Also we added an settings window so that the user is able to decide how the photos will be sorted.\n
     Now we will inform the user about updates and let the user the decission if he want to do the update.
   </description>
   <updateDate>18.11.2018</updateDate>

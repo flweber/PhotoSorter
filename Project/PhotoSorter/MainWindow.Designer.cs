@@ -37,25 +37,31 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.txt_Quelle = new System.Windows.Forms.TextBox();
             this.txt_Ziel = new System.Windows.Forms.TextBox();
-            this.btn_QuellWahl = new System.Windows.Forms.Button();
             this.btn_Zielwahl = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_Urlaubsziel = new System.Windows.Forms.TextBox();
-            this.btn_Start = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lbl_prozentanzeige = new System.Windows.Forms.Label();
-            this.btn_Settings = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenAltF4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.beendenAltF4ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fehlerMeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vorschlagBereitstellenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btn_QuellWahl = new System.Windows.Forms.Button();
+            this.btn_Settings = new System.Windows.Forms.Button();
+            this.btn_Start = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dtp_Vom
@@ -102,37 +108,35 @@
             // 
             // txt_Quelle
             // 
+            this.txt_Quelle.AllowDrop = true;
             this.txt_Quelle.Location = new System.Drawing.Point(77, 98);
             this.txt_Quelle.Name = "txt_Quelle";
             this.txt_Quelle.ReadOnly = true;
             this.txt_Quelle.Size = new System.Drawing.Size(174, 20);
             this.txt_Quelle.TabIndex = 5;
+            this.txt_Quelle.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_DragDrop);
+            this.txt_Quelle.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_DragEnter);
             // 
             // txt_Ziel
             // 
+            this.txt_Ziel.AllowDrop = true;
             this.txt_Ziel.Location = new System.Drawing.Point(77, 144);
             this.txt_Ziel.Name = "txt_Ziel";
             this.txt_Ziel.ReadOnly = true;
             this.txt_Ziel.Size = new System.Drawing.Size(174, 20);
             this.txt_Ziel.TabIndex = 6;
-            // 
-            // btn_QuellWahl
-            // 
-            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 97);
-            this.btn_QuellWahl.Name = "btn_QuellWahl";
-            this.btn_QuellWahl.Size = new System.Drawing.Size(75, 20);
-            this.btn_QuellWahl.TabIndex = 7;
-            this.btn_QuellWahl.Text = "Auswählen";
-            this.btn_QuellWahl.UseVisualStyleBackColor = true;
-            this.btn_QuellWahl.Click += new System.EventHandler(this.btn_QuellWahl_Click);
+            this.txt_Ziel.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_DragDrop);
+            this.txt_Ziel.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_DragEnter);
             // 
             // btn_Zielwahl
             // 
-            this.btn_Zielwahl.Location = new System.Drawing.Point(260, 144);
+            this.btn_Zielwahl.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_Zielwahl.Location = new System.Drawing.Point(260, 139);
             this.btn_Zielwahl.Name = "btn_Zielwahl";
-            this.btn_Zielwahl.Size = new System.Drawing.Size(75, 20);
+            this.btn_Zielwahl.Size = new System.Drawing.Size(102, 29);
             this.btn_Zielwahl.TabIndex = 8;
             this.btn_Zielwahl.Text = "Auswählen";
+            this.btn_Zielwahl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_Zielwahl.UseVisualStyleBackColor = true;
             this.btn_Zielwahl.Click += new System.EventHandler(this.btn_Zielwahl_Click);
             // 
@@ -171,17 +175,6 @@
             this.txt_Urlaubsziel.TabIndex = 12;
             this.txt_Urlaubsziel.TextChanged += new System.EventHandler(this.txt_Urlaubsziel_TextChanged);
             // 
-            // btn_Start
-            // 
-            this.btn_Start.Enabled = false;
-            this.btn_Start.Location = new System.Drawing.Point(408, 252);
-            this.btn_Start.Name = "btn_Start";
-            this.btn_Start.Size = new System.Drawing.Size(75, 23);
-            this.btn_Start.TabIndex = 13;
-            this.btn_Start.Text = "Start";
-            this.btn_Start.UseVisualStyleBackColor = true;
-            this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
-            // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.WorkerReportsProgress = true;
@@ -206,6 +199,120 @@
             this.lbl_prozentanzeige.Text = "label7";
             this.lbl_prozentanzeige.Visible = false;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dateiToolStripMenuItem,
+            this.hilfeToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(489, 24);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // dateiToolStripMenuItem
+            // 
+            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.einstellungenToolStripMenuItem,
+            this.beendenAltF4ToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.beendenAltF4ToolStripMenuItem1});
+            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.dateiToolStripMenuItem.Text = "Datei";
+            // 
+            // einstellungenToolStripMenuItem
+            // 
+            this.einstellungenToolStripMenuItem.Image = global::PhotoSorter.Properties.Resources.if_Settings_black_192450;
+            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.einstellungenToolStripMenuItem.Text = "Einstellungen";
+            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
+            // 
+            // beendenAltF4ToolStripMenuItem
+            // 
+            this.beendenAltF4ToolStripMenuItem.Image = global::PhotoSorter.Properties.Resources.iconfinder_Update_984748;
+            this.beendenAltF4ToolStripMenuItem.Name = "beendenAltF4ToolStripMenuItem";
+            this.beendenAltF4ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.beendenAltF4ToolStripMenuItem.Text = "Updates suchen";
+            this.beendenAltF4ToolStripMenuItem.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 6);
+            // 
+            // beendenAltF4ToolStripMenuItem1
+            // 
+            this.beendenAltF4ToolStripMenuItem1.Image = global::PhotoSorter.Properties.Resources.iconfinder_Gnome_Application_Exit_64_55530;
+            this.beendenAltF4ToolStripMenuItem1.Name = "beendenAltF4ToolStripMenuItem1";
+            this.beendenAltF4ToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.beendenAltF4ToolStripMenuItem1.Text = "Beenden";
+            this.beendenAltF4ToolStripMenuItem1.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem1_Click);
+            // 
+            // hilfeToolStripMenuItem
+            // 
+            this.hilfeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fehlerMeldenToolStripMenuItem,
+            this.vorschlagBereitstellenToolStripMenuItem});
+            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.hilfeToolStripMenuItem.Text = "Hilfe";
+            // 
+            // fehlerMeldenToolStripMenuItem
+            // 
+            this.fehlerMeldenToolStripMenuItem.Image = global::PhotoSorter.Properties.Resources.iconfinder_ic_report_48px_3669260;
+            this.fehlerMeldenToolStripMenuItem.Name = "fehlerMeldenToolStripMenuItem";
+            this.fehlerMeldenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.fehlerMeldenToolStripMenuItem.Text = "Fehler melden";
+            this.fehlerMeldenToolStripMenuItem.Click += new System.EventHandler(this.fehlerMeldenToolStripMenuItem_Click);
+            // 
+            // vorschlagBereitstellenToolStripMenuItem
+            // 
+            this.vorschlagBereitstellenToolStripMenuItem.Image = global::PhotoSorter.Properties.Resources.iconfinder_theme_options_tools_feature_3256561;
+            this.vorschlagBereitstellenToolStripMenuItem.Name = "vorschlagBereitstellenToolStripMenuItem";
+            this.vorschlagBereitstellenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.vorschlagBereitstellenToolStripMenuItem.Text = "Vorschlag bereitstellen";
+            this.vorschlagBereitstellenToolStripMenuItem.Click += new System.EventHandler(this.vorschlagBereitstellenToolStripMenuItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel3});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 278);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(489, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 18;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(356, 17);
+            this.toolStripStatusLabel3.Spring = true;
+            this.toolStripStatusLabel3.Text = "Version: ";
+            this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btn_QuellWahl
+            // 
+            this.btn_QuellWahl.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_QuellWahl.Location = new System.Drawing.Point(260, 93);
+            this.btn_QuellWahl.Name = "btn_QuellWahl";
+            this.btn_QuellWahl.Size = new System.Drawing.Size(102, 29);
+            this.btn_QuellWahl.TabIndex = 7;
+            this.btn_QuellWahl.Text = "Auswählen";
+            this.btn_QuellWahl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_QuellWahl.UseVisualStyleBackColor = true;
+            this.btn_QuellWahl.Click += new System.EventHandler(this.btn_QuellWahl_Click);
+            // 
             // btn_Settings
             // 
             this.btn_Settings.BackgroundImage = global::PhotoSorter.Properties.Resources.if_Settings_black_192450;
@@ -217,68 +324,26 @@
             this.btn_Settings.UseVisualStyleBackColor = true;
             this.btn_Settings.Click += new System.EventHandler(this.btn_Settings_Click);
             // 
-            // menuStrip1
+            // btn_Start
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dateiToolStripMenuItem,
-            this.hilfeToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(495, 24);
-            this.menuStrip1.TabIndex = 17;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // dateiToolStripMenuItem
-            // 
-            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.einstellungenToolStripMenuItem,
-            this.beendenAltF4ToolStripMenuItem,
-            this.beendenAltF4ToolStripMenuItem1});
-            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.dateiToolStripMenuItem.Text = "Datei";
-            // 
-            // einstellungenToolStripMenuItem
-            // 
-            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.einstellungenToolStripMenuItem.Text = "Einstellungen";
-            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
-            // 
-            // beendenAltF4ToolStripMenuItem
-            // 
-            this.beendenAltF4ToolStripMenuItem.Name = "beendenAltF4ToolStripMenuItem";
-            this.beendenAltF4ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.beendenAltF4ToolStripMenuItem.Text = "Updates suchen";
-            this.beendenAltF4ToolStripMenuItem.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem_Click);
-            // 
-            // beendenAltF4ToolStripMenuItem1
-            // 
-            this.beendenAltF4ToolStripMenuItem1.Name = "beendenAltF4ToolStripMenuItem1";
-            this.beendenAltF4ToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
-            this.beendenAltF4ToolStripMenuItem1.Text = "Beenden Alt+F4";
-            this.beendenAltF4ToolStripMenuItem1.Click += new System.EventHandler(this.beendenAltF4ToolStripMenuItem1_Click);
-            // 
-            // hilfeToolStripMenuItem
-            // 
-            this.hilfeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fehlerMeldenToolStripMenuItem});
-            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
-            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.hilfeToolStripMenuItem.Text = "Hilfe";
-            // 
-            // fehlerMeldenToolStripMenuItem
-            // 
-            this.fehlerMeldenToolStripMenuItem.Name = "fehlerMeldenToolStripMenuItem";
-            this.fehlerMeldenToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.fehlerMeldenToolStripMenuItem.Text = "Fehler melden";
-            this.fehlerMeldenToolStripMenuItem.Click += new System.EventHandler(this.fehlerMeldenToolStripMenuItem_Click);
+            this.btn_Start.Enabled = false;
+            this.btn_Start.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Start.Location = new System.Drawing.Point(408, 252);
+            this.btn_Start.Name = "btn_Start";
+            this.btn_Start.Size = new System.Drawing.Size(75, 23);
+            this.btn_Start.TabIndex = 13;
+            this.btn_Start.Text = "Start";
+            this.btn_Start.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btn_Start.UseVisualStyleBackColor = true;
+            this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
             // 
             // MainTool
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 282);
+            this.ClientSize = new System.Drawing.Size(489, 300);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btn_Settings);
             this.Controls.Add(this.lbl_prozentanzeige);
             this.Controls.Add(this.progressBar1);
@@ -299,6 +364,7 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainTool";
@@ -306,8 +372,11 @@
             this.Text = "Photo Sorter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainTool_FormClosing);
             this.Load += new System.EventHandler(this.MainTool_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainTool_KeyUp);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,6 +409,11 @@
         private System.Windows.Forms.ToolStripMenuItem beendenAltF4ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fehlerMeldenToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem vorschlagBereitstellenToolStripMenuItem;
     }
 }
 

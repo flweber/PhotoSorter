@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace PhotoSorter
 {
@@ -40,6 +43,88 @@ namespace PhotoSorter
             Sender = sender;
             Page = 1;
             maxPages = 2;
+            try
+            {
+                LoadSettings();
+            }
+            catch
+            {
+                try
+                {
+                    CreateSettingsFile(Path.Combine(Application.StartupPath, "settings.xml"), new XmlDocument());
+                }
+                catch
+                {
+                    // Wenn das auch nicht klappt, dann erstmal gar nichts
+                }
+            }
+        }
+
+        private void LoadSettings()
+        {
+            XmlDocument settings = new XmlDocument();
+            string FilePath = Path.Combine(Application.StartupPath, "settings.xml");
+            if (!File.Exists(FilePath))
+            {
+                CreateSettingsFile(FilePath, settings);
+            }
+            else
+            {
+                settings.Load(FilePath);
+                SetSettingsAutomatic(settings.DocumentElement);
+            }
+        }
+
+        private void SetSettingsAutomatic(XmlElement root)
+        {
+            if (root.GetAttribute("lang") == "de")
+                rb_German.Checked = true;
+            else
+                rb_English.Checked = true;
+            XmlNode child = root.SelectSingleNode("SortMode");
+            if (child.Attributes["Selection"].Value == "Copy")
+                rb_Copy.Checked = true;
+            else
+                rb_Cut.Checked = true;
+            child = root.SelectSingleNode("SortDate");
+            if (child.Attributes["Selection"].Value == "Creation")
+                rb_CreationDate.Checked = true;
+            else
+                rb_ModifiedatDate.Checked = true;
+            child = root.SelectSingleNode("ImageSelection");
+            if (child.Attributes["Selection"].Value == "DateRange")
+                rb_DateRange.Checked = true;
+            else
+                rb_AllImages.Checked = true;
+        }
+
+        private void CreateSettingsFile(string SavePath, XmlDocument settings)
+        {
+            XmlDeclaration xmlDeclaration = settings.CreateXmlDeclaration("1.0", "UTF-8", null);
+            string lang = Program.ci.TwoLetterISOLanguageName.Equals("de") ? "de" : "en";
+            XmlElement root = settings.CreateElement("PhotoSorterSettings");
+            root.SetAttribute("lang", lang);
+            XmlElement child = settings.CreateElement("SortMode");
+            if (rb_Copy.Checked)
+                child.SetAttribute("Selection", "Copy");
+            else
+                child.SetAttribute("Selection", "Cut");
+            root.AppendChild(child);
+            child = settings.CreateElement("SortDate");
+            if (rb_CreationDate.Checked)
+                child.SetAttribute("Selection", "Creation");
+            else
+                child.SetAttribute("Selection", "Modification");
+            root.AppendChild(child);
+            child = settings.CreateElement("ImageSelection");
+            if (rb_DateRange.Checked)
+                child.SetAttribute("Selection", "DateRange");
+            else
+                child.SetAttribute("Selection", "All");
+            root.AppendChild(child);
+            settings.AppendChild(root);
+            settings.InsertBefore(xmlDeclaration, root);
+            settings.Save(Path.Combine(Application.StartupPath, "settings.xml"));
         }
 
         private void btn_SortmodeHelp_Click(object sender, EventArgs e)
@@ -54,13 +139,31 @@ namespace PhotoSorter
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Close();
         }
 
         private void Settings_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             Hide();
+            try
+            {
+                XmlDocument settings = new XmlDocument();
+                settings.Load(Path.Combine(Application.StartupPath, "settings.xml"));
+                XmlNode root = settings.DocumentElement;
+                root.Attributes["lang"].Value = rb_German.Checked ? "de" : "en";
+                XmlNode SortMode = root.SelectSingleNode("SortMode");
+                SortMode.Attributes["Selection"].Value = rb_Copy.Checked ? "Copy" : "Cut";
+                XmlNode SortDate = root.SelectSingleNode("SortDate");
+                SortDate.Attributes["Selection"].Value = rb_CreationDate.Checked ? "Creation" : "Modification";
+                XmlNode ImageSelection = root.SelectSingleNode("ImageSelection");
+                ImageSelection.Attributes["Selection"].Value = rb_DateRange.Checked ? "DateRange" : "All";
+                settings.Save(Path.Combine(Application.StartupPath, "settings.xml"));
+            }
+            catch
+            {
+                //Erstmal garnichts
+            }
         }
 
         private void ShowPage()
@@ -172,7 +275,14 @@ namespace PhotoSorter
                 SortdateHelp = "If you have copied pictures from your smartphone or camera you should use the modified date because the creation date will be the date of copy.";
                 FileSelectionHelp = "Date Range: Will copy all images in the selected date range." + Environment.NewLine + "All Images: Will copy all images from the source diretory.";
             }
-            Sender.SetLanguage();
+            try
+            {
+                Sender.SetLanguage();
+            }
+            catch
+            {
+                //Beim ersten Durchlauf immer
+            }
         }
     }
 }
