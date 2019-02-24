@@ -11,10 +11,6 @@ script:
   - cp Release.zip ../../../../Upload/
   - cd ../../../../
   - cp Project/PhotoSorter/version.xml Upload/
-  only:
-  - master
-  - develop
-  - tags
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
