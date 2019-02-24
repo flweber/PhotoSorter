@@ -61,9 +61,13 @@ namespace PhotoSorter
             node = root.SelectSingleNode("version");
             txt_New.Text = node.InnerText;
             node = root.SelectSingleNode("updateDate");
-            txt_Information.Text = (Program.ci.TwoLetterISOLanguageName.Equals("de")) ? "Veröffentlichungsdatum: " : "Published at: " + node.InnerText + " | " + Environment.NewLine;
+            txt_Information.Text = ((Program.ci.TwoLetterISOLanguageName.Equals("de")) ? "Veröffentlichungsdatum: " : "Published at: ") + node.InnerText + " | " + Environment.NewLine;
             node = root.SelectSingleNode("description");
-            txt_Information.Text += node.InnerText;
+            // ***********************Testzwecke******************************
+            root = LocalInformation.DocumentElement;
+            node = root.SelectSingleNode("description");
+            // **************************Ende*********************************
+            txt_Information.Text += node.InnerText.Replace("\\n", Environment.NewLine);
             SetLanguage();
         }
 
@@ -72,8 +76,16 @@ namespace PhotoSorter
             switch (Program.ci.TwoLetterISOLanguageName)
             {
                 case "de":
-                    Text = "Update verfügbar";
-                    label1.Text = "Es ist ein Update verfügbar";
+                    if(txt_Current.Text.Equals(txt_New.Text))
+                    {
+                        Text = "Versionsinformationen";
+                        label1.Text = "Aktuellste Version installiert";
+                    }
+                    else
+                    {
+                        Text = "Update verfügbar";
+                        label1.Text = "Es ist ein Update verfügbar";
+                    }
                     label2.Text = "Installierte Version:";
                     label3.Text = "Aktuelle Version:";
                     label4.Text = "Versionsinformation:";
@@ -81,8 +93,16 @@ namespace PhotoSorter
                     break;
                 case "en":
                 default:
-                    Text = "Update available";
-                    label1.Text = "Softwareupdate available";
+                    if (txt_Current.Text.Equals(txt_New.Text))
+                    {
+                        Text = "Version information";
+                        label1.Text = "Latest Version installed";
+                    }
+                    else
+                    {
+                        Text = "Update available";
+                        label1.Text = "Softwareupdate available";
+                    }
                     label2.Text = "Installed Version:";
                     label3.Text = "Current Version:";
                     label4.Text = "Update information:";

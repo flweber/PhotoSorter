@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateWindow));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -98,11 +99,13 @@
             this.txt_Information.Multiline = true;
             this.txt_Information.Name = "txt_Information";
             this.txt_Information.ReadOnly = true;
+            this.txt_Information.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_Information.Size = new System.Drawing.Size(362, 237);
             this.txt_Information.TabIndex = 6;
             // 
             // btn_Update
             // 
+            this.btn_Update.Enabled = false;
             this.btn_Update.Location = new System.Drawing.Point(305, 415);
             this.btn_Update.Name = "btn_Update";
             this.btn_Update.Size = new System.Drawing.Size(75, 23);
@@ -136,8 +139,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UpdateWindow";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Update verfügbar";
